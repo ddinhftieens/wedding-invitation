@@ -20,6 +20,12 @@
   display: inline-block;
 }
 
+@media (min-width: 640px) {
+  .title {
+    white-space: nowrap;
+  }
+}
+
 .title::after {
   content: '';
   display: block;

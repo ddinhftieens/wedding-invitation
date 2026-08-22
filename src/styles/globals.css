@@ -77,14 +77,30 @@
   :root {
     --section-px: 40px;
     --section-py: 80px;
+
+    --text-xs:   13px;
+    --text-sm:   15px;
+    --text-base: 17px;
+    --text-lg:   20px;
+    --text-xl:   23px;
   }
 }
 
 /* ---------- Desktop ---------- */
 @media (min-width: 1024px) {
   :root {
-    --section-px: 48px;
+    --section-px: 60px;
     --section-py: 100px;
+
+    /* Bumper typography scale for desktop web view */
+    --text-xs:   14px;
+    --text-sm:   16px;
+    --text-base: 18px;
+    --text-lg:   22px;
+    --text-xl:   26px;
+    --text-2xl:  clamp(1.8rem, 3.5vw, 2.5rem);
+    --text-3xl:  clamp(2.1rem, 4vw, 3.2rem);
+    --text-hero: clamp(3.4rem, 6.5vw, 6.5rem);
   }
 }
 

@@ -52,9 +52,9 @@ export function RSVP() {
       <div className="section-wrapper section-wrapper--centered">
         <SectionTitle>Xác nhận tham dự</SectionTitle>
         <p className={styles.desc}>
-          Sự hiện diện của bạn là món quà quý giá nhất dành cho chúng tôi.
-          <br />
-          Hãy xác nhận trước <strong>{WEDDING.rsvpDeadline}</strong> để chúng tôi chuẩn bị tốt hơn nhé!
+          Sự hiện diện của bạn là món quà quý giá nhất dành cho gia đình chúng tôi.
+          {/* <br /> */}
+          {/* Hãy xác nhận trước <strong>{WEDDING.rsvpDeadline}</strong> để chúng tôi chuẩn bị chu đáo hơn nhé! */}
         </p>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
