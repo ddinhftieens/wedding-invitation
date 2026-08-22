@@ -60,17 +60,17 @@ export const STORY_EVENTS: StoryEvent[] = [
     text: 'Một ánh nhìn, một nụ cười và từ đó mọi thứ bắt đầu...',
   },
   {
-    year: '2025',
+    year: '2025-12',
     title: 'Chính thức hẹn hò',
     text: 'Sau những tháng ngày bên nhau, anh đã dũng cảm nói lên cảm xúc của mình. Và em đã gật đầu với nụ cười rạng rỡ nhất...',
   },
   {
-    year: '2026',
+    year: '202x-xx',
     title: 'Cầu hôn',
     text: 'Thời khắc quan trọng nhất cuộc đời...',
   },
   {
-    year: '2026',
+    year: '202x-xx',
     title: 'Ngày trọng đại',
     text: 'Và bây giờ, chúng tôi hạnh phúc được chia sẻ với bạn bè và gia đình ngày quan trọng nhất của cuộc đời mình.',
   },

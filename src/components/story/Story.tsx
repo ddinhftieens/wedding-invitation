@@ -27,7 +27,7 @@ export function Story() {
         <SectionTitle>Câu chuyện của chúng tôi</SectionTitle>
         <div className={styles.timeline} aria-label="Timeline tình yêu">
           {STORY_EVENTS.map((event, i) => (
-            <StoryItem key={event.year} event={event} index={i} />
+            <StoryItem key={i} event={event} index={i} />
           ))}
         </div>
       </div>
