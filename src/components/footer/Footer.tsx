@@ -6,11 +6,11 @@ export function Footer() {
     <footer className={styles.footer}>
       <div className={styles.hearts} aria-hidden="true">❤ ❤ ❤</div>
       <p className={styles.names}>{WEDDING.groomName} &amp; {WEDDING.brideName}</p>
-      <p className={styles.date}>xx · xx · 2026</p>
+      <p className={styles.date}>xx · xx · 20xx</p>
       <blockquote className={styles.quote}>
         "Bảo với em rằng: MỘT ĐỜI DÀI LẮM, HÃY ĐỂ ANH ĐƯỢC CHE CHỞ EM."
       </blockquote>
-      <p className={styles.copy}>© 2026 Thiệp mời cưới điện tử</p>
+      <p className={styles.copy}>© 20xx Thiệp cưới điện tử</p>
     </footer>
   );
 }

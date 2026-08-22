@@ -12,19 +12,19 @@ export const WEDDING = {
 
   // Wedding ceremony
   ceremonyDate: new Date('2026-09-14'),
-  ceremonyDateLabel: 'Chủ nhật xx/xx/2026',
+  ceremonyDateLabel: 'Chủ nhật xx/xx/20xx',
   ceremonyTime: 'xx:xx Chiều',
   ceremonyLunar: 'Âm Lịch: xx Tháng xx năm Bính Ngọ',
   ceremonyAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 
   // Intimate dinner
   dinnerDate: new Date('2026-09-14'),
-  dinnerDateLabel: 'Thứ Bảy xx/xx/2026',
+  dinnerDateLabel: 'Thứ Bảy xx/xx/20xx',
   dinnerTime: 'xx:00',
   dinnerAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 
   // RSVP deadline
-  rsvpDeadline: 'xx/xx/2026',
+  rsvpDeadline: 'xx/xx/20xx',
 
   // Map link
   mapsUrl: 'https://maps.google.com',

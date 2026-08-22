@@ -15,7 +15,7 @@ export function Hero() {
         {/* Main content */}
         <div className={styles.content}>
           <p className={`${styles.dateTag} animate-fade-up delay-200`}>
-            Chủ Nhật • xx / xx / 2026
+            Chủ Nhật • xx / xx / 20xx
           </p>
 
           <div className={styles.names}>
