@@ -136,27 +136,29 @@
 
 /* ── Lightbox Controls ── */
 .closeBtn {
-  position: absolute;
-  top: -48px;
-  right: 0;
-  width: 40px;
-  height: 40px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(30, 26, 18, 0.8);
+  background: rgba(24, 22, 18, 0.85);
   border: 1px solid var(--border);
   color: var(--text-primary);
-  font-size: 18px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: var(--transition);
-  z-index: 1002;
+  z-index: 1005;
+  backdrop-filter: blur(8px);
 }
 
 .closeBtn:hover {
   background: var(--gold);
   color: #0e0e0e;
+  border-color: var(--gold);
 }
 
 .navBtn {
@@ -185,7 +187,7 @@
 @media (max-width: 768px) {
   .prevBtn { left: 8px; }
   .nextBtn { right: 8px; }
-  .closeBtn { top: 8px; right: 8px; }
+  .closeBtn { top: 16px; right: 16px; width: 40px; height: 40px; }
 }
 
 .navBtn:hover {

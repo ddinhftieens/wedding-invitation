@@ -1,4 +1,5 @@
 import { SectionTitle } from '../ui/SectionTitle';
+import { Contact } from '../contact/Contact';
 import { FAMILIES } from '../../constants/wedding';
 import type { FamilyInfo } from '../../types';
 import styles from './Family.module.css';
@@ -39,6 +40,9 @@ export function Family() {
             <FamilyCard key={info.side} info={info} />
           ))}
         </div>
+
+        {/* Contact Hotline */}
+        <Contact />
       </div>
     </section>
   );

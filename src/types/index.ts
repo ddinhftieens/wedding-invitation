@@ -44,6 +44,13 @@ export interface GiftInfo {
   accountNumber: string;
 }
 
+export interface ContactInfo {
+  role: 'groom' | 'bride';
+  label: string;
+  phone: string;
+  rawPhone: string;
+}
+
 export interface CountdownTime {
   days: number;
   hours: number;

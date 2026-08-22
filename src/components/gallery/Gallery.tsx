@@ -67,7 +67,7 @@ export function Gallery() {
               <div className={styles.imageWrapper}>
                 <img
                   src={src}
-                  alt={`Ảnh cưới Minh Khoa & Ngọc Hân ${i + 1}`}
+                  alt={`Ảnh cưới Đình Tiến & Thu Hằng ${i + 1}`}
                   loading="lazy"
                   className={styles.img}
                 />
@@ -89,17 +89,17 @@ export function Gallery() {
           <div className={styles.lightbox} onClick={closeLightbox} role="dialog" aria-modal="true">
             <div className={styles.lightboxOverlay} />
 
-            <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-              {/* Close Button */}
-              <button
-                className={styles.closeBtn}
-                onClick={closeLightbox}
-                aria-label="Đóng xem ảnh"
-                title="Đóng (ESC)"
-              >
-                ✕
-              </button>
+            {/* Close Button */}
+            <button
+              className={styles.closeBtn}
+              onClick={closeLightbox}
+              aria-label="Đóng xem ảnh"
+              title="Đóng (ESC)"
+            >
+              ✕
+            </button>
 
+            <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
               {/* Prev Button */}
               <button
                 className={`${styles.navBtn} ${styles.prevBtn}`}
