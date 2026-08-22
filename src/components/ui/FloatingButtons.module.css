@@ -1,0 +1,116 @@
+.floatingContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+}
+
+@media (min-width: 768px) {
+  .floatingContainer {
+    bottom: 28px;
+    right: 28px;
+    gap: 12px;
+  }
+}
+
+/* ── Music Button ── */
+.musicBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(24, 22, 18, 0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 10px 16px;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all var(--transition);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  height: 44px;
+}
+
+.musicPlaying {
+  color: var(--gold-light);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-gold);
+  background: rgba(30, 26, 18, 0.95);
+}
+
+.spinIcon {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.musicLabel {
+  white-space: nowrap;
+}
+
+@media (max-width: 400px) {
+  .musicLabel {
+    display: none; /* Chi hien icon am nhac tren man hinh rat nho */
+  }
+  .musicBtn {
+    padding: 10px 12px;
+    border-radius: 50%;
+    width: 44px;
+    justify-content: center;
+  }
+}
+
+@media (hover: hover) {
+  .musicBtn:hover {
+    color: var(--gold-light);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+}
+
+.musicBtn:active {
+  transform: scale(0.95);
+}
+
+/* ── Back to Top Button ── */
+.backTop {
+  width: 44px;
+  height: 44px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0e0e0e;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+  transition: opacity var(--transition), transform var(--transition), background var(--transition);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+@media (hover: hover) {
+  .backTop:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+}
+
+.backTop:active {
+  transform: scale(0.92);
+}

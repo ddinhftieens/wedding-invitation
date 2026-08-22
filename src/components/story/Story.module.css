@@ -1,0 +1,115 @@
+/* ── Timeline container ── */
+.timeline {
+  position: relative;
+  padding: 10px 0;
+}
+
+/* Vertical line – only on desktop */
+@media (min-width: 768px) {
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border), var(--gold-dark), var(--border), transparent);
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Mobile: left-aligned timeline ── */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--border), var(--gold-dark), var(--border), transparent);
+}
+
+/* ── Item base (mobile) ── */
+.item {
+  position: relative;
+  margin-bottom: var(--space-8);
+  padding-left: 50px; /* space for dot + line */
+}
+
+/* Dot */
+.dot {
+  position: absolute;
+  left: 12px;
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.6);
+  z-index: 1;
+}
+
+/* Card (mobile: full width minus left offset) */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-6);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    border-color: var(--border);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-3px);
+  }
+}
+
+/* ── Desktop: alternating layout ── */
+@media (min-width: 768px) {
+  .timeline::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .item {
+    display: flex;
+    padding-left: 0;
+    width: 100%;
+    margin-bottom: var(--space-10);
+  }
+
+  .itemLeft  { justify-content: flex-start; }
+  .itemRight { justify-content: flex-end; }
+
+  .dot {
+    left: 50%;
+    top: 24px;
+    transform: translateX(-50%);
+  }
+
+  .card { width: 44%; }
+}
+
+/* ── Card content ── */
+.year {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  color: var(--gold);
+  font-weight: 300;
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}

@@ -1,0 +1,216 @@
+.subtext {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: -var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+/* ── Dynamic Pinterest-Style Masonry Layout (Gapless & Organic) ── */
+.grid {
+  column-count: 2;
+  column-gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    column-count: 3;
+    column-gap: var(--space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    column-count: 4;
+    column-gap: var(--space-4);
+  }
+}
+
+/* ── Grid Item ── */
+.item {
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .item {
+    margin-bottom: var(--space-4);
+  }
+}
+
+@media (hover: hover) {
+  .item:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: var(--shadow-gold);
+  }
+
+  .item:hover .overlay {
+    opacity: 1;
+  }
+
+  .item:hover .img {
+    transform: scale(1.04);
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s var(--ease);
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 14, 14, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+/* ── Lightbox Modal ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s var(--ease) both;
+}
+
+.lightboxOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.lightboxContent {
+  position: relative;
+  z-index: 1001;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightboxImg {
+  max-width: 90vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(201, 168, 76, 0.2);
+  border: 1px solid var(--border);
+  animation: scaleIn 0.3s var(--ease) both;
+}
+
+/* ── Lightbox Controls ── */
+.closeBtn {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(30, 26, 18, 0.8);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 1002;
+}
+
+.closeBtn:hover {
+  background: var(--gold);
+  color: #0e0e0e;
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(24, 22, 18, 0.85);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 1002;
+  backdrop-filter: blur(8px);
+}
+
+.prevBtn { left: -56px; }
+.nextBtn { right: -56px; }
+
+@media (max-width: 768px) {
+  .prevBtn { left: 8px; }
+  .nextBtn { right: 8px; }
+  .closeBtn { top: 8px; right: 8px; }
+}
+
+.navBtn:hover {
+  background: var(--gold);
+  color: #0e0e0e;
+  border-color: var(--gold);
+}
+
+.counter {
+  margin-top: 14px;
+  font-size: var(--text-sm);
+  color: var(--gold-light);
+  background: rgba(20, 18, 14, 0.8);
+  padding: 4px 16px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-soft);
+  letter-spacing: 0.1em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}

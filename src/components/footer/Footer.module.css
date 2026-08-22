@@ -1,0 +1,49 @@
+.footer {
+  border-top: 1px solid var(--border-soft);
+  padding: var(--space-16) var(--section-px) var(--space-10);
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 100%, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+}
+
+.hearts {
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: 14px;
+  margin-bottom: var(--space-5);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.1); }
+}
+
+.names {
+  font-family: var(--font-script);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  color: var(--gold-light);
+  margin-bottom: var(--space-2);
+}
+
+.date {
+  font-size: var(--text-sm);
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.quote {
+  font-family: var(--font-serif);
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+  max-width: 420px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+.copy {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
