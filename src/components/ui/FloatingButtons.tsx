@@ -21,9 +21,8 @@ export function FloatingButtons({ audioSrc }: Props) {
 
   // Initialize and handle audio play/pause
   useEffect(() => {
-    const audio = new Audio(
-      audioSrc || '/mp3/a_thousand_years.mp3'
-    );
+    const defaultMp3 = `${import.meta.env.BASE_URL}mp3/a_thousand_years.mp3`.replace(/([^:]\/)\/+/g, "$1");
+    const audio = new Audio(audioSrc || defaultMp3 || './mp3/a_thousand_years.mp3');
     audio.loop = true;
     audio.volume = 0.4;
     audioRef.current = audio;

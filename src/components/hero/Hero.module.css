@@ -9,7 +9,7 @@
   background:
     linear-gradient(180deg, rgba(14, 14, 14, 0.75) 0%, rgba(14, 14, 14, 0.6) 50%, rgba(14, 14, 14, 0.95) 100%),
     radial-gradient(ellipse 70% 60% at 20% 50%, rgba(100, 60, 10, 0.35) 0%, transparent 70%),
-    url('/image/bg.jpg') center/cover no-repeat;
+    url('../../../public/image/bg.jpg') center/cover no-repeat;
   padding: 80px var(--section-px) 50px;
 }
 
