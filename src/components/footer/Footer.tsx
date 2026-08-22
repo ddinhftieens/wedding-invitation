@@ -8,7 +8,7 @@ export function Footer() {
       <p className={styles.names}>{WEDDING.groomName} &amp; {WEDDING.brideName}</p>
       <p className={styles.date}>xx · xx · 2026</p>
       <blockquote className={styles.quote}>
-        "Bảo với em rằng: một đời dài lắm, hãy để anh được che chở em."
+        "Bảo với em rằng: MỘT ĐỜI DÀI LẮM, HÃY ĐỂ ANH ĐƯỢC CHE CHỞ EM."
       </blockquote>
       <p className={styles.copy}>© 2026 Thiệp mời cưới điện tử</p>
     </footer>

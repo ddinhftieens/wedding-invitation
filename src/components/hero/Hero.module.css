@@ -68,6 +68,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 100%;
 }
 
@@ -139,8 +141,16 @@
 /* ── Action buttons ── */
 .actions {
   display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.actions > * {
+  width: 100% !important;
+  justify-content: center;
 }
 
 /* ── Info card wrapper ── */
@@ -162,7 +172,24 @@
   }
 
   .content {
+    align-items: center;
+    text-align: center;
     max-width: 640px;
+  }
+
+  .actions {
+    flex-direction: row;
+    width: 100%;
+    max-width: 480px;
+    margin: 0;
+    gap: var(--space-4);
+  }
+
+  .actions > * {
+    flex: 1;
+    width: 100% !important;
+    justify-content: center;
+    white-space: nowrap;
   }
 
   .cardWrapper {

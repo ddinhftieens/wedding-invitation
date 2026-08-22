@@ -40,13 +40,14 @@
 
 .quote {
   font-family: var(--font-serif);
-  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  font-size: clamp(1.2rem, 3.8vw, 1.65rem);
   font-style: italic;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   margin-bottom: var(--space-8);
-  max-width: 420px;
+  max-width: 600px;
   margin-inline: auto;
-  line-height: 1.7;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
 }
 
 .copy {
