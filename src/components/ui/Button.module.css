@@ -35,35 +35,43 @@
   .btn:hover::before { transform: translateX(0); }
 }
 
-/* ── Primary ── */
+/* ── Primary Glassmorphism ── */
 .primary {
-  background: linear-gradient(135deg, var(--emerald-light) 0%, var(--emerald) 100%);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   color: #ffffff;
   font-weight: 600;
-  box-shadow: var(--shadow-btn);
-  border: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25);
 }
 
 @media (hover: hover) {
   .primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(46, 125, 85, 0.5);
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 12px 35px rgba(56, 189, 248, 0.35);
   }
 }
 .primary:active { transform: translateY(0); }
 
-/* ── Outline ── */
+/* ── Outline Glassmorphism ── */
 .outline {
-  border: 1.5px solid var(--border);
-  color: var(--text-primary);
-  background: transparent;
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 @media (hover: hover) {
   .outline:hover {
     border-color: var(--gold);
-    color: var(--gold-light);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.16);
     transform: translateY(-2px);
     box-shadow: var(--shadow-gold);
   }

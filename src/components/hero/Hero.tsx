@@ -31,7 +31,7 @@ export function Hero() {
           </div>
 
           <p className={`${styles.subtitle} animate-fade-up delay-700`}>
-            Trân trọng mời bạn đến chung vui trong ngày trọng đại của chúng tôi
+            Trân trọng kính mời bạn đến chung vui trong ngày trọng đại của chúng tôi
           </p>
 
           <div className={`${styles.actions} animate-fade-up delay-800`}>
