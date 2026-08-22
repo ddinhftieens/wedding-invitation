@@ -17,6 +17,12 @@ function useGlobalReveal() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    // Fallback for environments without IntersectionObserver
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+      return;
+    }
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -26,7 +32,7 @@ function useGlobalReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.01, rootMargin: '100px 0px 100px 0px' }
     );
 
     // Observe all existing .reveal elements
@@ -34,7 +40,14 @@ function useGlobalReveal() {
       observerRef.current?.observe(el);
     });
 
-    // MutationObserver to catch dynamically added .reveal elements (e.g. new wishes)
+    // Guaranteed fallback: Make all .reveal elements visible after 300ms
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach((el) => {
+        el.classList.add('visible');
+      });
+    }, 300);
+
+    // MutationObserver to catch dynamically added .reveal elements
     const mo = new MutationObserver(() => {
       document.querySelectorAll('.reveal:not(.visible)').forEach((el) => {
         observerRef.current?.observe(el);
@@ -43,6 +56,7 @@ function useGlobalReveal() {
     mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      clearTimeout(timer);
       observerRef.current?.disconnect();
       mo.disconnect();
     };

@@ -37,8 +37,8 @@
 
 /* ── Primary ── */
 .primary {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-  color: #0e0e0e;
+  background: linear-gradient(135deg, var(--emerald-light) 0%, var(--emerald) 100%);
+  color: #ffffff;
   font-weight: 600;
   box-shadow: var(--shadow-btn);
   border: none;
@@ -47,7 +47,7 @@
 @media (hover: hover) {
   .primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(201, 168, 76, 0.5);
+    box-shadow: 0 8px 30px rgba(46, 125, 85, 0.5);
   }
 }
 .primary:active { transform: translateY(0); }

@@ -5,7 +5,7 @@
 
 .ornament {
   font-size: var(--text-xs);
-  color: var(--gold-dark);
+  color: var(--emerald-light);
   letter-spacing: 0.4em;
   margin-bottom: var(--space-4);
 }
@@ -15,15 +15,11 @@
   font-size: var(--text-3xl);
   font-weight: 300;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.25;
   position: relative;
   display: inline-block;
-}
-
-@media (min-width: 640px) {
-  .title {
-    white-space: nowrap;
-  }
+  max-width: 100%;
+  text-wrap: balance;
 }
 
 .title::after {
@@ -31,6 +27,6 @@
   display: block;
   width: 50px;
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--emerald-light), transparent);
   margin: 14px auto 0;
 }

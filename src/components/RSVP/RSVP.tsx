@@ -98,8 +98,8 @@ export function RSVP() {
                 onChange={handleChange}
               >
                 <option value="yes-both">Tham dự cả hai buổi</option>
-                <option value="yes-dinner">Chỉ bữa cơm thân mật (28/03)</option>
-                <option value="yes-wedding">Chỉ lễ thành hôn (29/03)</option>
+                <option value="yes-dinner">Chỉ bữa cơm thân mật (xx/xx)</option>
+                <option value="yes-wedding">Chỉ lễ thành hôn (xx/xx)</option>
                 <option value="no">Tiếc là không thể đến</option>
               </select>
             </div>

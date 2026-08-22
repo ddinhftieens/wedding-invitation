@@ -10,7 +10,8 @@
   position: absolute;
   bottom: -10px;
   border-radius: 50%;
-  background: var(--gold);
+  background: linear-gradient(135deg, var(--emerald-light), var(--gold));
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.7);
   animation: floatParticle linear infinite;
 }
 

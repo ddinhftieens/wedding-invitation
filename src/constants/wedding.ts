@@ -11,14 +11,14 @@ export const WEDDING = {
   brideFullName: 'Nguyễn Thị Thu Hằng',
 
   // Wedding ceremony
-  ceremonyDate: new Date('2026-03-29T11:00:00'),
+  ceremonyDate: new Date('2026-09-14'),
   ceremonyDateLabel: 'Chủ nhật xx/xx/2026',
-  ceremonyTime: 'xx:xx Sáng',
+  ceremonyTime: 'xx:xx Chiều',
   ceremonyLunar: 'Âm Lịch: xx Tháng xx năm Bính Ngọ',
   ceremonyAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 
   // Intimate dinner
-  dinnerDate: new Date('2026-03-28T16:00:00'),
+  dinnerDate: new Date('2026-09-14'),
   dinnerDateLabel: 'Thứ Bảy xx/xx/2026',
   dinnerTime: 'xx:00',
   dinnerAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',

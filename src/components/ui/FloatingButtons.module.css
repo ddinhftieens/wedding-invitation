@@ -39,9 +39,9 @@
 
 .musicPlaying {
   color: var(--gold-light);
-  border-color: var(--gold);
-  box-shadow: var(--shadow-gold);
-  background: rgba(30, 26, 18, 0.95);
+  border-color: var(--emerald-light);
+  box-shadow: 0 0 20px rgba(46, 125, 85, 0.35);
+  background: rgba(21, 30, 24, 0.95);
 }
 
 .spinIcon {
@@ -72,7 +72,7 @@
 @media (hover: hover) {
   .musicBtn:hover {
     color: var(--gold-light);
-    border-color: var(--gold);
+    border-color: var(--emerald-light);
     transform: translateY(-2px);
   }
 }
@@ -85,13 +85,13 @@
 .backTop {
   width: 44px;
   height: 44px;
-  background: var(--gold);
+  background: var(--emerald);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0e0e0e;
-  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.4);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(46, 125, 85, 0.5);
   transition: opacity var(--transition), transform var(--transition), background var(--transition);
   opacity: 0;
   pointer-events: none;
@@ -106,7 +106,7 @@
 
 @media (hover: hover) {
   .backTop:hover {
-    background: var(--gold-light);
+    background: var(--emerald-light);
     transform: translateY(-2px);
   }
 }

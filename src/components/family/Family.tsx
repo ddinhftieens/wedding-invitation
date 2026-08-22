@@ -31,7 +31,7 @@ export function Family() {
         <div className={styles.header}>
           <SectionTitle ornament>Nhà trai &amp; nhà gái</SectionTitle>
           <p className={styles.note}>
-            💡 Thông tin thú vị: Hai nhà thông gia rất gần nhau!
+            Thông tin thú vị: Hai nhà thông gia rất gần nhau!
           </p>
         </div>
         <div className={styles.grid}>

@@ -5,23 +5,35 @@
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
-  /* Colors */
-  --bg-primary:    #0e0e0e;
-  --bg-secondary:  #161616;
-  --bg-card:       #1c1c1c;
-  --bg-card-hover: #222222;
+  /* Colors – Mệnh Thủy (Chú rể): Midnight Black + Royal Ocean Sapphire + Crystal Ice */
+  --bg-primary:    #090d16;
+  --bg-secondary:  #0f172a;
+  --bg-card:       #131c31;
+  --bg-card-hover: #1a2642;
 
-  --gold-light:    #e8c97a;
-  --gold:          #c9a84c;
-  --gold-dark:     #9b7b30;
-  --gold-glow:     rgba(201, 168, 76, 0.18);
+  /* Sky Crystal & Pearl (Mệnh Thủy) */
+  --gold-light:    #f0f6ff;
+  --gold:          #38bdf8;
+  --gold-dark:     #0284c7;
+  --gold-glow:     rgba(56, 189, 248, 0.25);
 
-  --text-primary:  #f0ead8;
-  --text-secondary:#b0a898;
-  --text-muted:    #7a7060;
+  /* Royal Ocean Sapphire Blue (Mệnh Thủy) */
+  --emerald-light: #60a5fa;
+  --emerald:       #2563eb;
+  --emerald-dark:  #1d4ed8;
+  --emerald-glow:  rgba(37, 99, 235, 0.35);
 
-  --border:        rgba(201, 168, 76, 0.2);
-  --border-soft:   rgba(255, 255, 255, 0.06);
+  --text-primary:  #f8fafc;
+  --text-secondary:#cbd5e1;
+  --text-muted:    #64748b;
+
+  --border:        rgba(56, 189, 248, 0.3);
+  --border-soft:   rgba(255, 255, 255, 0.08);
+
+  /* Shadows */
+  --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.65);
+  --shadow-gold: 0 0 30px rgba(56, 189, 248, 0.25);
+  --shadow-btn:  0 4px 20px rgba(37, 99, 235, 0.45);
 
   /* Spacing (8px grid) */
   --space-1:  4px;

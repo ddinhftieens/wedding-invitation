@@ -62,13 +62,13 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  background: linear-gradient(135deg, var(--emerald-dark), var(--emerald-light));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   font-size: 15px;
-  color: #0e0e0e;
+  color: #ffffff;
   flex-shrink: 0;
 }
 

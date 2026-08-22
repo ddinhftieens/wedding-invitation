@@ -1,11 +1,11 @@
 .card {
-  background: rgba(24, 22, 18, 0.92);
+  background: rgba(20, 30, 48, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  box-shadow: var(--shadow-card), var(--shadow-gold);
+  box-shadow: var(--shadow-card), 0 0 30px rgba(56, 189, 248, 0.2);
   width: 100%;
   position: relative;
 }
@@ -34,14 +34,15 @@
 .heart {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #c94c4c, #9b2020);
+  background: linear-gradient(135deg, #1d4ed8, #0284c7);
+  border: 1px solid var(--gold);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  color: #fff;
-  box-shadow: 0 0 12px rgba(201, 76, 76, 0.4);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
   flex-shrink: 0;
 }
 

@@ -2,9 +2,9 @@
 
 .note {
   font-size: var(--text-sm);
-  color: var(--gold);
+  color: var(--emerald-light);
   font-style: italic;
-  margin-top: -var(--space-5);
+  margin-top: var(--space-3);
   margin-bottom: var(--space-8);
   text-align: center;
 }
@@ -43,9 +43,9 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold);
-  background: rgba(201, 168, 76, 0.1);
-  border: 1px solid rgba(201, 168, 76, 0.3);
+  color: var(--gold-light);
+  background: rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.45);
   border-radius: var(--radius-xl);
   padding: 4px 12px;
   margin-bottom: var(--space-3);
