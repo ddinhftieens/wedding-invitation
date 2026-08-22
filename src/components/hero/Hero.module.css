@@ -86,27 +86,45 @@
   margin-bottom: var(--space-5);
 }
 
-.groom,
+.groom {
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 300;
+  line-height: 1.05;
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 55%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.4));
+}
+
 .bride {
   font-family: var(--font-serif);
   font-size: var(--text-hero);
   font-weight: 300;
   line-height: 1.05;
-  color: #fff;
-}
-
-.bride {
-  color: var(--gold-light);
   font-style: italic;
+  background: linear-gradient(135deg, #f0f6ff 0%, #38bdf8 45%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.4));
 }
 
 .ampersand {
   display: block;
   font-family: var(--font-script);
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  color: var(--emerald-light);
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 60%, #e0f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
   line-height: 1.1;
   margin: 4px 0;
+  filter: drop-shadow(0 2px 10px rgba(56, 189, 248, 0.3));
 }
 
 /* ── Subtitle ── */

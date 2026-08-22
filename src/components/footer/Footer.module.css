@@ -2,15 +2,16 @@
   border-top: 1px solid var(--border-soft);
   padding: var(--space-16) var(--section-px) var(--space-10);
   text-align: center;
-  background: radial-gradient(ellipse at 50% 100%, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
 }
 
 .hearts {
   font-size: 1.1rem;
-  color: var(--gold);
+  color: #ef4444;
   letter-spacing: 14px;
   margin-bottom: var(--space-5);
   animation: pulse 2.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
 }
 
 @keyframes pulse {
@@ -20,9 +21,14 @@
 
 .names {
   font-family: var(--font-script);
-  font-size: clamp(1.8rem, 6vw, 2.8rem);
-  color: var(--gold-light);
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
   margin-bottom: var(--space-2);
+  filter: drop-shadow(0 2px 10px rgba(56, 189, 248, 0.3));
 }
 
 .date {
