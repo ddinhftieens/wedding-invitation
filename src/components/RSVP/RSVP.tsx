@@ -1,7 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Button } from '../ui/Button';
 import { SectionTitle } from '../ui/SectionTitle';
-import { WEDDING } from '../../constants/wedding';
 import type { RSVPData } from '../../types';
 import styles from './RSVP.module.css';
 
