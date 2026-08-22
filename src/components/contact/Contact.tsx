@@ -4,7 +4,7 @@ import styles from './Contact.module.css';
 export function Contact() {
   return (
     <div className={styles.container}>
-      <h3 className={`${styles.title} reveal`}>Có việc gì hãy liên hệ chúng mình nhé!</h3>
+      <h3 className={`${styles.title} reveal`}>Liên hệ chúng mình nhé!</h3>
       <div className={styles.grid}>
         {HOTLINE_CONTACTS.map((item) => (
           <a
