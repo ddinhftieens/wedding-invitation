@@ -56,23 +56,23 @@ export const FAMILIES: FamilyInfo[] = [
 export const STORY_EVENTS: StoryEvent[] = [
   {
     year: '2025',
-    title: 'Lần đầu gặp gỡ',
+    title: 'Ngày mình gặp nhau',
     text: 'Một ánh nhìn, một nụ cười và từ đó mọi thứ bắt đầu...',
   },
   {
     year: '2025-12',
-    title: 'Chính thức hẹn hò',
-    text: 'Sau những tháng ngày bên nhau, anh đã dũng cảm nói lên cảm xúc của mình. Và em đã gật đầu với nụ cười rạng rỡ nhất...',
+    title: 'Lời yêu thương',
+    text: 'Sau những ngày tháng cùng nhau trò chuyện, sẻ chia, anh đã dũng cảm nói lên cảm xúc của mình. Và em đã gật đầu với nụ cười rạng rỡ nhất...',
   },
   {
     year: '202x-xx',
-    title: 'Cầu hôn',
-    text: 'Thời khắc quan trọng nhất cuộc đời...',
+    title: 'Lời cầu hôn',
+    text: 'Một lời hỏi, một chiếc nhẫn và một cái gật đầu. Từ khoảnh khắc ấy, chúng mình quyết định cùng nhau viết tiếp câu chuyện của cả cuộc đời....',
   },
   {
-    year: '202x-xx',
-    title: 'Ngày trọng đại',
-    text: 'Và bây giờ, chúng tôi hạnh phúc được chia sẻ với bạn bè và gia đình ngày quan trọng nhất của cuộc đời mình.',
+    year: '202x-xx-xx',
+    title: 'Ngày mình về chung một nhà',
+    text: 'Hôm nay, tình yêu của chúng mình bước sang một chương mới. Cảm ơn gia đình và những người thân yêu đã cùng chứng kiến khoảnh khắc đặc biệt này....',
   },
 ];
 
