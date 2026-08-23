@@ -165,7 +165,5 @@ export const WEDDING_PHOTOS: string[] = [
   `${baseUrl}image/22.jpg`,
   `${baseUrl}image/23.jpg`,
   `${baseUrl}image/24.jpg`,
-  `${baseUrl}image/25.jpg`,
-  `${baseUrl}image/26.jpg`,
-  `${baseUrl}image/27.jpg`,
+  `${baseUrl}image/25.jpg`
 ];
