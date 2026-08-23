@@ -97,9 +97,9 @@ export function RSVP() {
                 value={form.option}
                 onChange={handleChange}
               >
-                <option value="yes-both">Tham dự cả hai buổi</option>
-                <option value="yes-dinner">Chỉ bữa cơm thân mật (xx/xx)</option>
-                <option value="yes-wedding">Chỉ lễ thành hôn (xx/xx)</option>
+                <option value="yes">Sẽ tham dự</option>
+                {/* <option value="yes-dinner">Chỉ bữa cơm thân mật (xx/xx)</option> */}
+                {/* <option value="yes-wedding">Chỉ lễ thành hôn (xx/xx)</option> */}
                 <option value="no">Tiếc là không thể đến</option>
               </select>
             </div>
@@ -116,6 +116,9 @@ export function RSVP() {
                 <option value={1}>1 người</option>
                 <option value={2}>2 người</option>
                 <option value={3}>3 người</option>
+                <option value={4}>4 người</option>
+                <option value={5}>5 người</option>
+                <option value={6}>6 người</option>
               </select>
             </div>
           </div>
