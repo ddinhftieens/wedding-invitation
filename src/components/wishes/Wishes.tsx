@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Button } from '../ui/Button';
 import { SectionTitle } from '../ui/SectionTitle';
+import { ThankYouModal } from '../ui/ThankYouModal';
 import { SAMPLE_WISHES } from '../../constants/wedding';
 import type { WishItem, RelationType } from '../../types';
 import { RELATION_LABELS } from '../../types';
@@ -34,6 +35,8 @@ const defaultForm: WishFormData = { name: '', relation: 'friend', text: '' };
 export function Wishes() {
   const [wishes, setWishes] = useState<WishItem[]>(SAMPLE_WISHES);
   const [form, setForm] = useState<WishFormData>(defaultForm);
+  const [showModal, setShowModal] = useState(false);
+  const [submittedGuestName, setSubmittedGuestName] = useState('');
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -46,16 +49,20 @@ export function Wishes() {
     e.preventDefault();
     if (!form.name.trim() || !form.text.trim()) return;
 
+    const guestName = form.name.trim();
+
     const newWish: WishItem = {
       id: generateId(),
-      name: form.name.trim(),
+      name: guestName,
       relation: form.relation,
       text: form.text.trim(),
       time: 'Vừa xong',
     };
 
     setWishes((prev) => [newWish, ...prev]);
+    setSubmittedGuestName(guestName);
     setForm(defaultForm);
+    setShowModal(true);
   }
 
   return (
@@ -122,6 +129,15 @@ export function Wishes() {
         <div className={styles.list} aria-label="Danh sách lời chúc">
           {wishes.map((w) => <WishCard key={w.id} wish={w} />)}
         </div>
+
+        <ThankYouModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          guestName={submittedGuestName}
+          type="wish"
+          title="Cảm ơn lời chúc của bạn!"
+          message="Lời chúc ý nghĩa của bạn đã được lưu lại trong sổ lưu bút tình yêu. Cảm ơn bạn rất nhiều vì đã gửi tình cảm chân thành tới cô dâu và chú rể!"
+        />
       </div>
     </section>
   );

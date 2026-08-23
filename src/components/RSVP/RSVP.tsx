@@ -1,20 +1,22 @@
 import { useState, type FormEvent } from 'react';
 import { Button } from '../ui/Button';
 import { SectionTitle } from '../ui/SectionTitle';
+import { ThankYouModal } from '../ui/ThankYouModal';
 import type { RSVPData } from '../../types';
 import styles from './RSVP.module.css';
 
 const defaultForm: RSVPData = {
   name: '',
   phone: '',
-  option: 'yes-both',
+  option: 'yes',
   guestCount: 0,
   message: '',
 };
 
 export function RSVP() {
   const [form, setForm] = useState<RSVPData>(defaultForm);
-  const [submitted, setSubmitted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [submittedData, setSubmittedData] = useState<{ name: string; option: string } | null>(null);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -27,24 +29,16 @@ export function RSVP() {
     e.preventDefault();
     if (!form.name.trim()) return;
     console.log('RSVP submitted:', form);
-    setSubmitted(true);
+    setSubmittedData({ name: form.name.trim(), option: form.option });
+    setShowModal(true);
   }
 
-  if (submitted) {
-    return (
-      <section id="rsvp">
-        <div className="section-wrapper section-wrapper--centered">
-          <div className={styles.success}>
-            <div className={styles.successIcon}>🎉</div>
-            <h3 className={styles.successTitle}>Cảm ơn bạn rất nhiều!</h3>
-            <p className={styles.successText}>
-              Chúng tôi rất vui khi biết bạn sẽ đến. Hẹn gặp bạn vào ngày trọng đại!
-            </p>
-          </div>
-        </div>
-      </section>
-    );
+  function handleCloseModal() {
+    setShowModal(false);
+    setForm(defaultForm);
   }
+
+  const isAttending = submittedData?.option !== 'no';
 
   return (
     <section id="rsvp">
@@ -143,6 +137,23 @@ export function RSVP() {
             Gửi xác nhận
           </Button>
         </form>
+
+        <ThankYouModal
+          isOpen={showModal}
+          onClose={handleCloseModal}
+          guestName={submittedData?.name}
+          type={isAttending ? 'rsvp-yes' : 'rsvp-no'}
+          title={
+            isAttending
+              ? 'Cảm ơn bạn đã tới tham dự!'
+              : 'Cảm ơn phản hồi của bạn!'
+          }
+          message={
+            isAttending
+              ? 'Gia đình cô dâu và chú rể rất vui mừng và hân hạnh được đón tiếp bạn trong ngày trọng đại. Sự có mặt của bạn là niềm hạnh phúc lớn dành cho đôi bạn trẻ!'
+              : 'Dù rất tiếc vì bạn không thể đến dự, nhưng cảm ơn bạn rất nhiều vì đã gửi lời chúc và tình cảm ấm áp dành cho đôi bạn trẻ!'
+          }
+        />
       </div>
     </section>
   );

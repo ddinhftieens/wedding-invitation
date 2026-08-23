@@ -12,7 +12,7 @@ export interface WishItem {
 export interface RSVPData {
   name: string;
   phone: string;
-  option: 'yes-both' | 'yes-dinner' | 'yes-wedding' | 'no';
+  option: 'yes-both' | 'yes-dinner' | 'yes-wedding' | 'no' | 'yes';
   guestCount: number;
   message: string;
 }
