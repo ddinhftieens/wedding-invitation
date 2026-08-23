@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { FloatingButtons } from '../components/ui/FloatingButtons';
+import { RosePetals } from '../components/ui/RosePetals';
 import { Hero } from '../components/hero/Hero';
 import { Countdown } from '../components/countdown/Countdown';
 import { Family } from '../components/family/Family';
@@ -68,6 +69,7 @@ export function WeddingPage() {
 
   return (
     <main>
+      {/* <RosePetals /> */}
       <Hero />
       <Countdown />
       <Family />

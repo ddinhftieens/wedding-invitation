@@ -1,10 +1,19 @@
 import { SectionTitle } from '../ui/SectionTitle';
 import { STORY_EVENTS } from '../../constants/wedding';
+import { getCardBgImage } from '../../utils/helpers';
 import type { StoryEvent } from '../../types';
 import styles from './Story.module.css';
 
 function StoryItem({ event, index }: { event: StoryEvent; index: number }) {
   const isRight = index % 2 !== 0;
+  const bgUrl = getCardBgImage(`story_${index}_${event.year}`);
+  const bgStyle = {
+    backgroundImage: `linear-gradient(180deg, rgba(15, 23, 42, 0.86) 0%, rgba(9, 13, 22, 0.93) 100%), url(${bgUrl})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+  };
+
   return (
     <div
       className={`${styles.item} ${isRight ? styles.itemRight : styles.itemLeft} reveal`}
@@ -12,9 +21,12 @@ function StoryItem({ event, index }: { event: StoryEvent; index: number }) {
     >
       <div className={styles.dot} aria-hidden="true" />
       <div className={styles.card}>
-        <span className={styles.year}>{event.year}</span>
-        <h3 className={styles.title}>{event.title}</h3>
-        <p className={styles.text}>{event.text}</p>
+        <div className={styles.bgImage} style={bgStyle} />
+        <div className={styles.cardContent}>
+          <span className={styles.year}>{event.year}</span>
+          <h3 className={styles.title}>{event.title}</h3>
+          <p className={styles.text}>{event.text}</p>
+        </div>
       </div>
     </div>
   );

@@ -69,7 +69,7 @@ export function InfoCard({ onDirections, onPhotos }: Props) {
                 <polyline points="21 15 16 10 5 21" />
               </svg>
             </div>
-            Ảnh cưới
+            Album
           </a>
         </div>
       </div>

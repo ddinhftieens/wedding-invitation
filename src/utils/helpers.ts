@@ -50,7 +50,24 @@ export function formatRelativeTime(date: Date): string {
   return `${days} ngày trước`;
 }
 
+import { WEDDING_PHOTOS } from '../constants/wedding';
+
 /** Generate unique ID */
 export function generateId(): string {
   return `w_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+}
+
+/** Get a deterministic random photo background based on a seed key */
+export function getCardBgImage(seed: string | number): string {
+  if (!WEDDING_PHOTOS || WEDDING_PHOTOS.length === 0) {
+    return `${import.meta.env.BASE_URL}image/bg.jpg`;
+  }
+  const str = String(seed);
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  const index = Math.abs(hash) % WEDDING_PHOTOS.length;
+  return WEDDING_PHOTOS[index];
 }

@@ -2,6 +2,7 @@ import { SectionTitle } from '../ui/SectionTitle';
 import { useCountdown } from '../../hooks/useCountdown';
 import { WEDDING } from '../../constants/wedding';
 import { fmt } from '../../utils/helpers';
+import { SaveTheDate } from './SaveTheDate';
 import styles from './Countdown.module.css';
 
 interface CountdownItemProps {
@@ -34,6 +35,7 @@ export function Countdown() {
           <span className={styles.sep} aria-hidden="true">:</span>
           <CountdownItem number={fmt(seconds)} label="Giây" />
         </div>
+        <SaveTheDate />
       </div>
     </section>
   );
