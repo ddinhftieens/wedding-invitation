@@ -17,7 +17,7 @@ export function ThankYouModal({
   title,
   guestName,
   message,
-  type = 'rsvp-yes',
+  // type = 'rsvp-yes',
 }: ThankYouModalProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
