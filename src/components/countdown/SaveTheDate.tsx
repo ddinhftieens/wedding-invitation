@@ -8,7 +8,7 @@ interface SaveTheDateProps {
 
 export function SaveTheDate({
   date = WEDDING.ceremonyDate,
-  bgImage = `${import.meta.env.BASE_URL}image/bg.jpg`,
+  bgImage = `${import.meta.env.BASE_URL}image/1.jpg`,
 }: SaveTheDateProps) {
   const year = date.getFullYear();
   const month = date.getMonth(); // 0-indexed
