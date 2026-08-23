@@ -37,7 +37,7 @@ export function ThankYouModal({
 
   if (!isOpen) return null;
 
-  const icon = type === 'rsvp-yes' ? '🎉' : type === 'rsvp-no' ? '💌' : '💖';
+  // const icon = type === 'rsvp-yes' ? '🎉' : type === 'rsvp-no' ? '💌' : '💖';
 
   return (
     <div className={styles.backdrop} onClick={onClose} aria-modal="true" role="dialog">
