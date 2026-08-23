@@ -12,14 +12,14 @@ export const WEDDING = {
 
   // Wedding ceremony
   ceremonyDate: new Date('2026-09-14'),
-  ceremonyDateLabel: 'Chủ nhật xx/xx/20xx',
-  ceremonyTime: 'xx:xx Chiều',
-  ceremonyLunar: 'Âm Lịch: xx Tháng xx năm Bính Ngọ',
+  ceremonyDateLabel: 'Chủ nhật xx / xx / 20xx',
+  ceremonyTime: 'xx:00',
+  ceremonyLunar: 'Âm Lịch: xx tháng xx năm xxxx',
   ceremonyAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 
   // Intimate dinner
   dinnerDate: new Date('2026-09-14'),
-  dinnerDateLabel: 'Thứ Bảy xx/xx/20xx',
+  dinnerDateLabel: 'Thứ bảy xx / xx / 20xx',
   dinnerTime: 'xx:00',
   dinnerAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 

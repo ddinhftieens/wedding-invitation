@@ -69,7 +69,7 @@ export function WeddingPage() {
 
   return (
     <main>
-      {/* <RosePetals /> */}
+      <RosePetals />
       <Hero />
       <Countdown />
       <Family />

@@ -10,7 +10,7 @@ export function Footer() {
       <blockquote className={styles.quote}>
         "Bảo với em rằng: MỘT ĐỜI DÀI LẮM, HÃY ĐỂ ANH ĐƯỢC CHE CHỞ EM."
       </blockquote>
-      <p className={styles.copy}>© 20xx Thiệp cưới điện tử</p>
+      <p className={styles.copy}>© Đình Tiến & Thu Hằng</p>
     </footer>
   );
 }
