@@ -36,7 +36,7 @@ export function Story() {
   return (
     <section id="story">
       <div className="section-wrapper section-wrapper--wide">
-        <SectionTitle>Câu chuyện của chúng tôi</SectionTitle>
+        <SectionTitle>Từ gặp gỡ đến yêu thương</SectionTitle>
         <div className={styles.timeline} aria-label="Timeline tình yêu">
           {STORY_EVENTS.map((event, i) => (
             <StoryItem key={i} event={event} index={i} />

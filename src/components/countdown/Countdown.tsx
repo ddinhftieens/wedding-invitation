@@ -25,11 +25,11 @@ export function Countdown() {
   return (
     <section id="countdown" className={styles.section}>
       <div className="section-wrapper section-wrapper--centered">
-        <SectionTitle>Đếm ngược đến ngày cưới</SectionTitle>
-        <div className={styles.grid} role="timer" aria-live="polite" aria-label="Đếm ngược đến ngày cưới">
-          <CountdownItem number={fmt(days)}    label="Ngày" />
+        <SectionTitle>Khoảnh khắc được mong chờ</SectionTitle>
+        <div className={styles.grid} role="timer" aria-live="polite" aria-label="Đếm ngược">
+          <CountdownItem number={fmt(days)} label="Ngày" />
           <span className={styles.sep} aria-hidden="true">:</span>
-          <CountdownItem number={fmt(hours)}   label="Giờ" />
+          <CountdownItem number={fmt(hours)} label="Giờ" />
           <span className={styles.sep} aria-hidden="true">:</span>
           <CountdownItem number={fmt(minutes)} label="Phút" />
           <span className={styles.sep} aria-hidden="true">:</span>

@@ -115,7 +115,7 @@ export function Wishes() {
   return (
     <section id="wishes">
       <div className="section-wrapper section-wrapper--centered">
-        <SectionTitle>Sổ lưu bút</SectionTitle>
+        <SectionTitle>Lời chúc yêu thương</SectionTitle>
         <p className={styles.desc}>Hãy để lại lời chúc yêu thương cho cô dâu và chú rể nhé!</p>
 
         {/* Form */}
@@ -193,7 +193,7 @@ export function Wishes() {
             </div>
           ) : wishes.length === 0 ? (
             <div className={styles.emptyState}>
-              <span>Hãy là người đầu tiên gửi lời chúc tới cô dâu và chú rể</span>
+              <span>Hãy là người đầu tiên gửi lời chúc yêu thương tới cô dâu & chú rể</span>
             </div>
           ) : (
             wishes.map((w) => <WishCard key={w.id} wish={w} />)
@@ -206,7 +206,7 @@ export function Wishes() {
           guestName={submittedGuestName}
           type="wish"
           title="Cảm ơn lời chúc của bạn!"
-          message="Lời chúc ý nghĩa của bạn đã được gửi thành công đến cô dâu & chú rể và sẽ hiển thị trên trang sau khi được phê duyệt."
+          message="Lời chúc ý nghĩa của bạn đã được gửi thành công đến cô dâu & chú rể!"
         />
       </div>
     </section>

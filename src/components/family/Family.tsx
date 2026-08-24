@@ -30,7 +30,7 @@ export function Family() {
     <section id="family">
       <div className="section-wrapper section-wrapper--wide">
         <div className={styles.header}>
-          <SectionTitle ornament>Nhà trai &amp; nhà gái</SectionTitle>
+          <SectionTitle ornament>Gia đình hai bên</SectionTitle>
           <p className={styles.note}>
             Hai gia đình cách nhau 4' đi bộ, rất gần nha!
           </p>

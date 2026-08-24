@@ -95,9 +95,8 @@
 
 /* ── Action buttons ── */
 .actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
   margin-top: 4px;
 }
 
