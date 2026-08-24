@@ -17,14 +17,40 @@ export const WEDDING = {
   ceremonyLunar: 'Âm Lịch: xx tháng xx năm xxxx',
   ceremonyAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 
-  // Intimate dinner
+  // Intimate dinner default / specific configurations
   dinnerDate: new Date('2026-09-14'),
   dinnerDateLabel: 'Thứ bảy xx / xx / 20xx',
   dinnerTime: 'xx:00',
   dinnerAddress: 'Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
 
+  // Configs for specific guest sides and meal times
+  groomDinnerEvening: {
+    time: '18:00',
+    dateLabel: 'Thứ Bảy xx / xx / 20xx',
+    lunar: 'Âm lịch: xx tháng xx năm xxxx',
+    address: 'Tại Nhà Trai: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
+  },
+  groomDinnerMorning: {
+    time: '10:30',
+    dateLabel: 'Chủ Nhật xx / xx / 20xx',
+    lunar: 'Âm lịch: xx tháng xx năm xxxx',
+    address: 'Tại Nhà Trai: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
+  },
+  brideDinnerEvening: {
+    time: '18:00',
+    dateLabel: 'Thứ Bảy xx / xx / 20xx',
+    lunar: 'Âm lịch: xx tháng xx năm xxxx',
+    address: 'Tại Nhà Gái: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
+  },
+  brideDinnerMorning: {
+    time: '10:30',
+    dateLabel: 'Chủ Nhật xx / xx / 20xx',
+    lunar: 'Âm lịch: xx tháng xx năm xxxx',
+    address: 'Tại Nhà Gái: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
+  },
+
   // RSVP deadline
-  rsvpDeadline: 'xx/xx/20xx',
+  rsvpDeadline: 'xx / xx / 20xx',
 
   // Map link
   mapsUrl: 'https://maps.google.com',

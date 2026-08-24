@@ -1,11 +1,34 @@
 import { WEDDING } from '../../constants/wedding';
+import { getInvitationParams } from '../../utils/urlParams';
 import styles from './InfoCard.module.css';
 
-// interface Props {
-//   onDirections?: () => void;
-// }
+export function InfoCard() {
+  const { side, dinner } = getInvitationParams();
 
-export function InfoCard(/*{ onDirections }*/) {
+  // Xác định cấu hình bữa cơm thân mật dựa trên param URL
+  // side: 'groom' (mặc định) | 'bride'
+  // dinner: 'morning' | 'evening' (mặc định)
+  const isBride = side === 'bride';
+  const isMorning = dinner === 'morning';
+
+  type DinnerConfig = {
+    readonly time: string;
+    readonly dateLabel: string;
+    readonly lunar: string;
+    readonly address: string;
+  };
+
+  let dinnerConfig: DinnerConfig = WEDDING.groomDinnerEvening;
+  if (isBride && isMorning) {
+    dinnerConfig = WEDDING.brideDinnerMorning;
+  } else if (isBride && !isMorning) {
+    dinnerConfig = WEDDING.brideDinnerEvening;
+  } else if (!isBride && isMorning) {
+    dinnerConfig = WEDDING.groomDinnerMorning;
+  }
+
+  const dinnerLabel = isMorning ? 'Bữa cơm thân mật' : 'Bữa cơm thân mật';
+
   return (
     <div className={styles.cardContainer} id="wedding-info-card">
       {/* Main Glass Card */}
@@ -32,38 +55,15 @@ export function InfoCard(/*{ onDirections }*/) {
           <p className={styles.label}>Địa điểm</p>
           <p className={styles.value}>{WEDDING.ceremonyAddress}</p>
         </div>
-
-        {/* Action buttons */}
-        {/* <div className={styles.actions}>
-          <a
-            href="#family"
-            className={styles.actionBtn}
-            id="directions-btn"
-            onClick={(e) => {
-              if (onDirections) {
-                onDirections();
-              } else {
-                e.preventDefault();
-                document.getElementById('family')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-            }}
-          >
-            <div className={styles.iconCircle}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <polygon points="3 11 22 2 13 21 11 13 3 11" />
-              </svg>
-            </div>
-            Chỉ đường
-          </a>
-        </div> */}
       </div>
 
       {/* Dinner Separate Glass Card */}
       <div className={styles.dinnerCard}>
-        <p className={styles.label}>Bữa cơm thân mật</p>
-        <p className={styles.value}>{WEDDING.dinnerTime} • {WEDDING.dinnerDateLabel}</p>
-        <p className={styles.sub}>Tại nhà trai: {WEDDING.dinnerAddress}</p>
+        <p className={styles.label}>{dinnerLabel}</p>
+        <p className={styles.value}>{dinnerConfig.time} • {dinnerConfig.dateLabel}</p>
+        <p className={styles.sub}>{dinnerConfig.address}</p>
       </div>
     </div>
   );
 }
+

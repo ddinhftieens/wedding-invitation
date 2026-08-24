@@ -3,8 +3,15 @@ import { WEDDING } from '../../constants/wedding';
 import styles from './Hero.module.css';
 import { Particles } from './Particles';
 import { InfoCard } from './InfoCard';
+import { getInvitationParams } from '../../utils/urlParams';
 
 export function Hero() {
+  const { name, honorific } = getInvitationParams();
+
+  // Tạo câu mời cá nhân hoá theo tên và danh xưng từ URL param
+  const guestName = name ? name.trim() : 'bạn';
+  const hostHonorific = honorific ? honorific.trim() : 'chúng tôi';
+
   return (
     <section id="hero" className={styles.hero}>
       {/* Background decoration */}
@@ -31,7 +38,7 @@ export function Hero() {
           </div>
 
           <p className={`${styles.subtitle} animate-fade-up delay-700`}>
-            Trân trọng kính mời bạn đến chung vui trong ngày trọng đại của chúng tôi
+            Trân trọng kính mời <strong style={{ color: 'var(--gold)' }}>{guestName}</strong> đến chung vui trong ngày trọng đại của {hostHonorific}
           </p>
 
           <div className={`${styles.actions} animate-fade-up delay-800`}>
