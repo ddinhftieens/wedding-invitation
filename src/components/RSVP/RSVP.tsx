@@ -7,7 +7,6 @@ import styles from './RSVP.module.css';
 
 const defaultForm: RSVPData = {
   name: '',
-  phone: '',
   option: 'yes',
   guestCount: 0,
   message: '',
@@ -51,34 +50,19 @@ export function RSVP() {
         </p>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
-          <div className={styles.row}>
-            <div className={styles.group}>
-              <label htmlFor="rsvp-name" className="form-label">Họ và tên *</label>
-              <input
-                id="rsvp-name"
-                name="name"
-                type="text"
-                className="form-input"
-                placeholder="Nguyễn Văn A"
-                value={form.name}
-                onChange={handleChange}
-                required
-                autoComplete="name"
-              />
-            </div>
-            <div className={styles.group}>
-              <label htmlFor="rsvp-phone" className="form-label">Số điện thoại</label>
-              <input
-                id="rsvp-phone"
-                name="phone"
-                type="tel"
-                className="form-input"
-                placeholder="0912 345 678"
-                value={form.phone}
-                onChange={handleChange}
-                autoComplete="tel"
-              />
-            </div>
+          <div className={styles.group}>
+            <label htmlFor="rsvp-name" className="form-label">Họ và tên *</label>
+            <input
+              id="rsvp-name"
+              name="name"
+              type="text"
+              className="form-input"
+              placeholder="Nguyễn Văn A"
+              value={form.name}
+              onChange={handleChange}
+              required
+              autoComplete="name"
+            />
           </div>
 
           <div className={styles.row}>
