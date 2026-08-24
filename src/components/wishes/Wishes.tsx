@@ -2,7 +2,7 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { Button } from '../ui/Button';
 import { SectionTitle } from '../ui/SectionTitle';
 import { ThankYouModal } from '../ui/ThankYouModal';
-import { WEDDING, SAMPLE_WISHES } from '../../constants/wedding';
+import { WEDDING } from '../../constants/wedding';
 import type { WishItem, RelationType } from '../../types';
 import { RELATION_LABELS } from '../../types';
 import { getInitial } from '../../utils/helpers';
