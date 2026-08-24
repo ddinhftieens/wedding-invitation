@@ -3,9 +3,10 @@ import { Button } from '../ui/Button';
 import { SectionTitle } from '../ui/SectionTitle';
 import { ThankYouModal } from '../ui/ThankYouModal';
 import { WEDDING } from '../../constants/wedding';
+import { getInvitationParams } from '../../utils/urlParams';
 import type { WishItem, RelationType } from '../../types';
 import { RELATION_LABELS } from '../../types';
-import { getInitial } from '../../utils/helpers';
+import { getInitial, formatRelativeTime } from '../../utils/helpers';
 import styles from './Wishes.module.css';
 
 function WishCard({ wish }: { wish: WishItem }) {
@@ -17,7 +18,7 @@ function WishCard({ wish }: { wish: WishItem }) {
           <span className={styles.name}>{wish.name}</span>
           <span className={styles.relation}>{RELATION_LABELS[wish.relation] || wish.relation}</span>
         </div>
-        <span className={styles.time}>{wish.time}</span>
+        <span className={styles.time}>{formatRelativeTime(wish.time || wish.id)}</span>
       </div>
       <p className={styles.text}>{wish.text}</p>
     </article>
@@ -42,6 +43,11 @@ export function Wishes() {
 
   // Fetch approved wishes from Google Sheets via Apps Script
   useEffect(() => {
+    const { name: paramName } = getInvitationParams();
+    if (paramName) {
+      setForm((prev) => ({ ...prev, name: paramName }));
+    }
+
     const url = WEDDING.guestbookScriptUrl;
     if (!url) return;
 
@@ -96,6 +102,7 @@ export function Wishes() {
             'Content-Type': 'text/plain;charset=utf-8',
           },
           body: JSON.stringify({
+            action: 'add_wish',
             name: guestName,
             relation: guestRelation,
             text: guestText,

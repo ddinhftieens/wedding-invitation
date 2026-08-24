@@ -1,11 +1,11 @@
 import { WEDDING } from '../../constants/wedding';
 import styles from './InfoCard.module.css';
 
-interface Props {
-  onDirections?: () => void;
-}
+// interface Props {
+//   onDirections?: () => void;
+// }
 
-export function InfoCard({ onDirections }: Props) {
+export function InfoCard(/*{ onDirections }*/) {
   return (
     <div className={styles.cardContainer} id="wedding-info-card">
       {/* Main Glass Card */}

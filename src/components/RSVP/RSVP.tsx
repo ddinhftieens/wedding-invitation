@@ -1,7 +1,9 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { Button } from '../ui/Button';
 import { SectionTitle } from '../ui/SectionTitle';
 import { ThankYouModal } from '../ui/ThankYouModal';
+import { WEDDING } from '../../constants/wedding';
+import { getInvitationParams } from '../../utils/urlParams';
 import type { RSVPData } from '../../types';
 import styles from './RSVP.module.css';
 
@@ -14,21 +16,63 @@ const defaultForm: RSVPData = {
 
 export function RSVP() {
   const [form, setForm] = useState<RSVPData>(defaultForm);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [submittedData, setSubmittedData] = useState<{ name: string; option: string } | null>(null);
+
+  // Tự động điền họ tên từ URL parameters khi khách mở link
+  useEffect(() => {
+    const { name } = getInvitationParams();
+    if (name) {
+      setForm((prev) => ({ ...prev, name }));
+    }
+  }, []);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: name === 'guestCount' ? Number(value) : value }));
+    setForm((prev) => {
+      if (name === 'option' && value === 'no') {
+        return { ...prev, option: 'no', guestCount: 0 };
+      }
+      return { ...prev, [name]: name === 'guestCount' ? Number(value) : value };
+    });
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!form.name.trim()) return;
-    console.log('RSVP submitted:', form);
-    setSubmittedData({ name: form.name.trim(), option: form.option });
+    if (!form.name.trim() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    const { id: guestId } = getInvitationParams();
+    const guestName = form.name.trim();
+
+    // Gửi cập nhật thông tin lên Google Sheet
+    const url = WEDDING.guestbookScriptUrl;
+    if (url) {
+      try {
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify({
+            action: 'update_rsvp',
+            id: guestId || '',
+            name: guestName,
+            option: form.option === 'yes' ? 'Sẽ tham dự' : 'Không thể tham gia',
+            guestCount: form.guestCount,
+          }),
+        });
+      } catch (err) {
+        console.error('Lỗi khi gửi xác nhận tham dự:', err);
+      }
+    }
+
+    setSubmittedData({ name: guestName, option: form.option });
+    setIsSubmitting(false);
     setShowModal(true);
   }
 
@@ -89,6 +133,7 @@ export function RSVP() {
                 className="form-input"
                 value={form.guestCount}
                 onChange={handleChange}
+                disabled={form.option === 'no' || isSubmitting}
               >
                 <option value={0}>Chỉ mình tôi</option>
                 <option value={1}>1 người</option>
@@ -101,7 +146,7 @@ export function RSVP() {
             </div>
           </div>
 
-          <div className={styles.group}>
+          {/* <div className={styles.group}>
             <label htmlFor="rsvp-message" className="form-label">Lời nhắn cho cô dâu &amp; chú rể</label>
             <textarea
               id="rsvp-message"
@@ -112,13 +157,22 @@ export function RSVP() {
               value={form.message}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
 
-          <Button variant="primary" type="submit" fullWidth id="submit-rsvp">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-            Gửi xác nhận
+          <Button variant="primary" type="submit" fullWidth id="submit-rsvp" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <div className={styles.spinner} />
+                Đang gửi xác nhận...
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                Gửi xác nhận
+              </>
+            )}
           </Button>
         </form>
 

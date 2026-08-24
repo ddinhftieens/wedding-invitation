@@ -30,7 +30,7 @@ export const WEDDING = {
   mapsUrl: 'https://maps.google.com',
 
   // Google Apps Script Guestbook API
-  guestbookScriptUrl: 'https://script.google.com/macros/s/AKfycbw7AVvZfdS8hKjH7eJxlbmQXcRnfP2Z0CvveX-CPWUt1i4K2iB-R0UlTDO7uqAJo-Ad/exec',
+  guestbookScriptUrl: 'https://script.google.com/macros/s/AKfycby0Ki5AqI8HZAvjiDG590KD2D2ZzzT1OfrHBciJIRt_J9CBkrqqYGpVDVt4KGmIqgu9/exec',
 } as const;
 
 // ── Families ──────────────────────────────────────────────────
