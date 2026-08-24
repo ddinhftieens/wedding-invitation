@@ -172,7 +172,7 @@ export function GuestsPage() {
           {/* Nhân xưng (Text input) */}
           <div className={styles.group}>
             <label htmlFor="guest-honorific" className={styles.label}>
-              Nhân xưng (Cách gọi khách mời)
+              Nhân xưng (Cách xưng hô với khách mời)
             </label>
             <input
               id="guest-honorific"
@@ -202,7 +202,7 @@ export function GuestsPage() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                 />
-                <span className={styles.radioText}>Cơm tối</span>
+                <span className={styles.radioText}>Cơm tối (18:00 xx/xx)</span>
               </label>
 
               <label
@@ -217,7 +217,7 @@ export function GuestsPage() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                 />
-                <span className={styles.radioText}>Cơm sáng</span>
+                <span className={styles.radioText}>Cơm trưa (10:00 xx/xx)</span>
               </label>
             </div>
           </div>

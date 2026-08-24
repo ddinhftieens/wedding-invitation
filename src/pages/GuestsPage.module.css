@@ -36,7 +36,7 @@
 
 .card {
   width: 100%;
-  max-width: 520px;
+  max-width: 600px;
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
@@ -120,8 +120,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
+  gap: 8px;
+  padding: 12px 12px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
@@ -140,11 +140,13 @@
 
 .radioCard input[type="radio"] {
   accent-color: var(--gold);
+  flex-shrink: 0;
 }
 
 .radioText {
   font-size: var(--text-sm);
   color: var(--text-primary);
+  white-space: nowrap;
 }
 
 .submitBtn {
