@@ -188,7 +188,7 @@ export function RSVP() {
           }
           message={
             isAttending
-              ? 'Gia đình cô dâu và chú rể rất vui mừng và hân hạnh được đón tiếp bạn trong ngày trọng đại. Sự có mặt của bạn là niềm hạnh phúc lớn dành cho cô dâu & chú rể!'
+              ? 'Gia đình cô dâu và chú rể rất vui mừng và hân hạnh được đón tiếp bạn trong ngày trọng đại này.'
               : 'Dù rất tiếc vì bạn không thể đến dự, nhưng cảm ơn bạn rất nhiều vì đã gửi lời chúc và tình cảm ấm áp dành cho cô dâu & chú rể!'
           }
         />

@@ -181,6 +181,10 @@ textarea {
 /* ============================================================
    SHARED SECTION WRAPPER
    ============================================================ */
+section[id] {
+  scroll-margin-top: 20px;
+}
+
 .section-wrapper {
   padding: var(--section-py) var(--section-px);
   width: 100%;
