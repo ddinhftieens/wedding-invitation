@@ -4,7 +4,7 @@
 export interface WishItem {
   id: string;
   name: string;
-  relation: 'friend' | 'colleague' | 'family' | 'other';
+  relation: 'friend' | 'colleague' | 'family' | 'other' | 'anhchiem' | 'codichubac' | 'ongba';
   text: string;
   time: string;
 }
@@ -62,6 +62,9 @@ export type AttendOption = RSVPData['option'];
 export type RelationType = WishItem['relation'];
 
 export const RELATION_LABELS: Record<RelationType, string> = {
+  anhchiem: 'Anh/Chị/Em',
+  codichubac: 'Cô/Dì/Chú/Bác',
+  ongba: 'Ông/Bà',
   friend: 'Bạn bè',
   colleague: 'Đồng nghiệp',
   family: 'Họ hàng',
