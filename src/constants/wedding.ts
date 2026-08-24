@@ -28,6 +28,9 @@ export const WEDDING = {
 
   // Map link
   mapsUrl: 'https://maps.google.com',
+
+  // Google Apps Script Guestbook API
+  guestbookScriptUrl: 'https://script.google.com/macros/s/AKfycbw7AVvZfdS8hKjH7eJxlbmQXcRnfP2Z0CvveX-CPWUt1i4K2iB-R0UlTDO7uqAJo-Ad/exec',
 } as const;
 
 // ── Families ──────────────────────────────────────────────────
