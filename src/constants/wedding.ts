@@ -25,26 +25,26 @@ export const WEDDING = {
 
   // Configs for specific guest sides and meal times
   groomDinnerEvening: {
-    time: '18:00',
-    dateLabel: 'Thứ Bảy xx / xx / 20xx',
+    time: '18:30',
+    dateLabel: 'Thứ bảy xx / xx / 20xx',
     lunar: 'Âm lịch: xx tháng xx năm xxxx',
     address: 'Tại Nhà Trai: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
   },
   groomDinnerMorning: {
     time: '10:30',
-    dateLabel: 'Chủ Nhật xx / xx / 20xx',
+    dateLabel: 'Chủ nhật xx / xx / 20xx',
     lunar: 'Âm lịch: xx tháng xx năm xxxx',
     address: 'Tại Nhà Trai: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
   },
   brideDinnerEvening: {
     time: '18:00',
-    dateLabel: 'Thứ Bảy xx / xx / 20xx',
+    dateLabel: 'Thứ bảy xx / xx / 20xx',
     lunar: 'Âm lịch: xx tháng xx năm xxxx',
     address: 'Tại Nhà Gái: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
   },
   brideDinnerMorning: {
-    time: '10:30',
-    dateLabel: 'Chủ Nhật xx / xx / 20xx',
+    time: '10:00',
+    dateLabel: 'Chủ nhật xx / xx / 20xx',
     lunar: 'Âm lịch: xx tháng xx năm xxxx',
     address: 'Tại Nhà Gái: Xóm xx, Thôn Vĩnh Thịnh, Xã Ngọc Hồi, Thành phố Hà Nội',
   },

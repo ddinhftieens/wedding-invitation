@@ -98,20 +98,16 @@ export function GuestsPage() {
 
   return (
     <div className={styles.pageContainer}>
-      <a href="/" className={styles.backHome} aria-label="Quay lại thiệp cưới">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
-        Trang chủ thiệp cưới
-      </a>
-
       <div className={styles.card}>
         <div className={styles.header}>
-          {/* <span className={styles.badge}>Quản lý khách mời</span> */}
+          <a href="/" className={styles.backHome} aria-label="Quay lại thiệp cưới" title="Quay lại trang chủ thiệp cưới">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            <span className={styles.backHomeText}>Trang chủ</span>
+          </a>
           <h1 className={styles.title}>Thông tin khách mời</h1>
-          {/* <p className={styles.subtitle}>
-            Điền thông tin khách mời và tạo link thiệp điện tử cá nhân hóa
-          </p> */}
+          <div className={styles.headerSpacer} />
         </div>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -189,36 +185,57 @@ export function GuestsPage() {
           {/* Cơm thân mật (Sáng hoặc Tối) */}
           <div className={styles.group}>
             <label className={styles.label}>Tổ chức tiệc cưới *</label>
-            <div className={styles.radioGroup}>
-              <label
-                className={`${styles.radioCard} ${form.intimateDinner === 'evening' ? styles.radioActive : ''
-                  }`}
-              >
-                <input
-                  type="radio"
-                  name="intimateDinner"
-                  value="evening"
-                  checked={form.intimateDinner === 'evening'}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                />
-                <span className={styles.radioText}>Tiệc tối (18:00 xx/xx)</span>
-              </label>
+            <div className={styles.radioGroupVertical}>
+              {(() => {
+                const eveningConfig =
+                  form.side === 'bride'
+                    ? WEDDING.brideDinnerEvening
+                    : WEDDING.groomDinnerEvening;
+                const morningConfig =
+                  form.side === 'bride'
+                    ? WEDDING.brideDinnerMorning
+                    : WEDDING.groomDinnerMorning;
 
-              <label
-                className={`${styles.radioCard} ${form.intimateDinner === 'morning' ? styles.radioActive : ''
-                  }`}
-              >
-                <input
-                  type="radio"
-                  name="intimateDinner"
-                  value="morning"
-                  checked={form.intimateDinner === 'morning'}
-                  onChange={handleChange}
-                  disabled={isSubmitting}
-                />
-                <span className={styles.radioText}>Tiệc trưa (10:00 xx/xx)</span>
-              </label>
+                return (
+                  <>
+                    <label
+                      className={`${styles.radioCard} ${
+                        form.intimateDinner === 'evening' ? styles.radioActive : ''
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="intimateDinner"
+                        value="evening"
+                        checked={form.intimateDinner === 'evening'}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
+                      />
+                      <span className={styles.radioText}>
+                        Tiệc tối ({eveningConfig.time} {eveningConfig.dateLabel})
+                      </span>
+                    </label>
+
+                    <label
+                      className={`${styles.radioCard} ${
+                        form.intimateDinner === 'morning' ? styles.radioActive : ''
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="intimateDinner"
+                        value="morning"
+                        checked={form.intimateDinner === 'morning'}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
+                      />
+                      <span className={styles.radioText}>
+                        Tiệc trưa ({morningConfig.time} {morningConfig.dateLabel})
+                      </span>
+                    </label>
+                  </>
+                );
+              })()}
             </div>
           </div>
 
