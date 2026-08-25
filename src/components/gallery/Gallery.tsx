@@ -47,7 +47,7 @@ export function Gallery() {
   return (
     <section id="gallery">
       <div className="section-wrapper section-wrapper--wide">
-        <SectionTitle>Album</SectionTitle>
+        <SectionTitle>Ảnh cưới</SectionTitle>
         <p className={styles.subtext}>Nhấn vào ảnh để xem chi tiết phóng to</p>
 
         {/* Gallery Grid */}

@@ -188,7 +188,7 @@ export function GuestsPage() {
 
           {/* Cơm thân mật (Sáng hoặc Tối) */}
           <div className={styles.group}>
-            <label className={styles.label}>Bữa cơm thân mật *</label>
+            <label className={styles.label}>Tổ chức tiệc cưới *</label>
             <div className={styles.radioGroup}>
               <label
                 className={`${styles.radioCard} ${form.intimateDinner === 'evening' ? styles.radioActive : ''

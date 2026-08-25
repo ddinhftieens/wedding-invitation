@@ -27,7 +27,7 @@ export function InfoCard() {
     dinnerConfig = WEDDING.groomDinnerMorning;
   }
 
-  const dinnerLabel = isMorning ? 'Bữa cơm thân mật' : 'Bữa cơm thân mật';
+  const dinnerLabel = "Tổ chức tiệc cưới";
 
   return (
     <div className={styles.cardContainer} id="wedding-info-card">
@@ -80,7 +80,7 @@ export function InfoCard() {
                 <polyline points="21 15 16 10 5 21" />
               </svg>
             </div>
-            Album ảnh cưới
+            Ảnh cưới
           </a>
         </div>
       </div>

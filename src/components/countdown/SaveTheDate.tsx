@@ -77,10 +77,10 @@ export function SaveTheDate({
         </div>
 
         {/* Divider line */}
-        <div className={styles.divider} />
+        {/* <div className={styles.divider} /> */}
 
         {/* Save the Date cursive text */}
-        <div className={styles.scriptTitle}>Save the Date</div>
+        {/* <div className={styles.scriptTitle}>Save the Date</div> */}
       </div>
     </div>
   );
