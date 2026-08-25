@@ -266,3 +266,51 @@
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 640px) {
+  .pageContainer {
+    padding: var(--space-4) var(--space-3);
+    justify-content: flex-start;
+  }
+
+  .backHome {
+    position: static;
+    align-self: flex-start;
+    margin-bottom: var(--space-4);
+  }
+
+  .card {
+    padding: var(--space-5) var(--space-4);
+    margin-top: 0;
+  }
+
+  .title {
+    font-size: var(--text-xl);
+  }
+
+  .radioGroup {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .radioCard {
+    padding: 10px 12px;
+  }
+
+  .radioText {
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .linkBox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .copyBtn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+

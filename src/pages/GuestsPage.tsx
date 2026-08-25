@@ -79,8 +79,8 @@ export function GuestsPage() {
             honorific: form.honorific.trim() || 'Bạn',
             intimateDinner:
               form.intimateDinner === 'evening'
-                ? 'Cơm tối thân mật'
-                : 'Cơm sáng thân mật',
+                ? 'Tiệc tối'
+                : 'Tiệc trưa',
             invitationLink: invitationLink,
           }),
         });
@@ -108,7 +108,7 @@ export function GuestsPage() {
       <div className={styles.card}>
         <div className={styles.header}>
           {/* <span className={styles.badge}>Quản lý khách mời</span> */}
-          <h1 className={styles.title}>Thông Tin Khách Mời</h1>
+          <h1 className={styles.title}>Thông tin khách mời</h1>
           {/* <p className={styles.subtitle}>
             Điền thông tin khách mời và tạo link thiệp điện tử cá nhân hóa
           </p> */}
@@ -202,7 +202,7 @@ export function GuestsPage() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                 />
-                <span className={styles.radioText}>Cơm tối (18:00 xx/xx)</span>
+                <span className={styles.radioText}>Tiệc tối (18:00 xx/xx)</span>
               </label>
 
               <label
@@ -217,7 +217,7 @@ export function GuestsPage() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                 />
-                <span className={styles.radioText}>Cơm trưa (10:00 xx/xx)</span>
+                <span className={styles.radioText}>Tiệc trưa (10:00 xx/xx)</span>
               </label>
             </div>
           </div>
