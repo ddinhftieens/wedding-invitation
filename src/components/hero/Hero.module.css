@@ -154,6 +154,28 @@
   justify-content: center;
 }
 
+.rsvpIcon {
+  color: var(--gold, #38bdf8);
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.45));
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.wishesIcon {
+  color: #fb7185;
+  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.45));
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.actions > *:hover .rsvpIcon {
+  transform: scale(1.12);
+}
+
+.actions > *:hover .wishesIcon {
+  transform: scale(1.18);
+}
+
 /* ── Info card wrapper ── */
 .cardWrapper {
   width: 100%;
