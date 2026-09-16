@@ -98,7 +98,12 @@ export function GuestsPage() {
   }
 
   return (
-    <div className={styles.pageContainer}>
+    <div
+      className={styles.pageContainer}
+      style={{
+        '--bg-photo': `image-set(url('${import.meta.env.BASE_URL}image/bg.webp') type('image/webp'), url('${import.meta.env.BASE_URL}image/bg.jpg') type('image/jpeg'))`,
+      } as React.CSSProperties}
+    >
       <div className={styles.card}>
         <div className={styles.header}>
           <a
