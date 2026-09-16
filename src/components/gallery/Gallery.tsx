@@ -56,6 +56,46 @@ export function Gallery() {
     touchStartYRef.current = null;
   };
 
+  // Background preload all high-res photos when browser is idle (zero initial lag)
+  useEffect(() => {
+    const preloadAll = () => {
+      WEDDING_PHOTO_ITEMS.forEach((photo) => {
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = photo.full;
+      });
+    };
+
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        const idleId = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
+          preloadAll,
+          { timeout: 2500 }
+        );
+        return () => {
+          (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
+        };
+      } else {
+        const timerId = setTimeout(preloadAll, 1200);
+        return () => clearTimeout(timerId);
+      }
+    }
+  }, []);
+
+  // Prioritize preloading adjacent photos immediately when lightbox is opened
+  useEffect(() => {
+    if (selectedIndex === null) return;
+    const nextIdx = (selectedIndex + 1) % WEDDING_PHOTO_ITEMS.length;
+    const nextNextIdx = (selectedIndex + 2) % WEDDING_PHOTO_ITEMS.length;
+    const prevIdx = (selectedIndex - 1 + WEDDING_PHOTO_ITEMS.length) % WEDDING_PHOTO_ITEMS.length;
+
+    [nextIdx, nextNextIdx, prevIdx].forEach((idx) => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = WEDDING_PHOTO_ITEMS[idx].full;
+    });
+  }, [selectedIndex]);
+
   // Handle keyboard events (Escape, ArrowLeft, ArrowRight)
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -76,6 +116,15 @@ export function Gallery() {
     };
   }, [selectedIndex, showNext, showPrev]);
 
+  const preloadImage = (index: number) => {
+    const photo = WEDDING_PHOTO_ITEMS[index];
+    if (photo) {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = photo.full;
+    }
+  };
+
   return (
     <section id="gallery">
       <div className="section-wrapper section-wrapper--wide">
@@ -89,6 +138,7 @@ export function Gallery() {
               key={photo.id}
               className={`${styles.item} reveal`}
               onClick={() => openLightbox(i)}
+              onMouseEnter={() => preloadImage(i)}
               role="button"
               tabIndex={0}
               aria-label={`Xem ảnh cưới ${i + 1}`}
