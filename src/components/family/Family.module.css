@@ -4,7 +4,7 @@
 
 .note {
   font-size: var(--text-sm);
-  color: var(--emerald-light);
+  color: #ffffff;
   font-style: italic;
   margin-top: var(--space-3);
   margin-bottom: var(--space-8);
