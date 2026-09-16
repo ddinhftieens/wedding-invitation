@@ -11,6 +11,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Đình Tiến &amp; Thu Hằng</title>
+  <!-- GitHub Pages SPA: restore URL after 404.html redirect -->
+  <script>
+    (function () {
+      var redirect = sessionStorage.getItem('spa_redirect');
+      if (redirect) {
+        sessionStorage.removeItem('spa_redirect');
+        var base = '/wedding-invitation';
+        window.history.replaceState(null, '', base + redirect);
+      }
+    }());
+  </script>
   <!-- Preload Critical Hero Background (WebP for modern browsers, JPG fallback) -->
   <link rel="preload" as="image" href="./image/bg.webp" type="image/webp" imagesrcset="./image/bg.webp" />
   <link rel="preload" as="image" href="./image/bg.jpg" type="image/jpeg" />

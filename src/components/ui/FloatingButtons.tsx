@@ -9,7 +9,8 @@ export function FloatingButtons({ audioSrc }: Props) {
   const [showTop, setShowTop] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const userManuallyPausedRef = useRef<boolean>(false);
+  // true = user explicitly paused; reset on every page load (we always want autoplay)
+  const userPausedRef = useRef(false);
   const playPromiseRef = useRef<Promise<void> | null>(null);
 
   // Track scroll position for back to top button
@@ -19,97 +20,89 @@ export function FloatingButtons({ audioSrc }: Props) {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  // Initialize and handle audio play/pause
+  // Audio engine
   useEffect(() => {
-    const defaultMp3 = `${import.meta.env.BASE_URL}mp3/a_thousand_years.mp3`.replace(/([^:]\/)\/+/g, "$1");
-    const audio = new Audio(audioSrc || defaultMp3 || './mp3/a_thousand_years.mp3');
+    const src = audioSrc
+      || `${import.meta.env.BASE_URL}mp3/a_thousand_years.mp3`.replace(/([^:]\/)\/+/g, '$1');
+
+    const audio = new Audio(src);
     audio.loop = true;
     audio.volume = 0.4;
+    // iOS Safari: must call load() before play() works after a gesture
+    audio.load();
     audioRef.current = audio;
 
-    // Helper to start playback
-    const startAudio = () => {
-      if (!audioRef.current || userManuallyPausedRef.current) return;
+    // Attempt playback; resolves instantly on desktop, rejects on iOS until gesture
+    const tryPlay = () => {
+      if (!audioRef.current || userPausedRef.current) return;
       playPromiseRef.current = audioRef.current.play();
       playPromiseRef.current
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {
-          // Autoplay blocked by browser policy
-          setIsPlaying(false);
-        });
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false)); // blocked — gesture listener below will retry
     };
 
-    // User gesture handler to unlock autoplay if blocked
-    const handleFirstUserGesture = (e: Event) => {
-      // Don't auto-start if the user clicked directly on the music button to toggle
-      const target = e.target as HTMLElement | null;
-      if (target && target.closest('#music-toggle-btn')) {
-        return;
-      }
+    // iOS/Safari require play() to be called synchronously inside a user gesture.
+    // We attach ONE-TIME listeners on the first real interaction anywhere on the page.
+    const onFirstGesture = (e: Event) => {
+      // Ignore taps on the music button itself (handled by toggleMusic)
+      if ((e.target as HTMLElement | null)?.closest('#music-toggle-btn')) return;
 
-      if (!userManuallyPausedRef.current && audioRef.current && audioRef.current.paused) {
-        startAudio();
+      if (!userPausedRef.current && audioRef.current?.paused) {
+        tryPlay();
       }
-
-      // Cleanup gesture listeners after first interaction
-      window.removeEventListener('click', handleFirstUserGesture);
-      window.removeEventListener('touchstart', handleFirstUserGesture);
-      window.removeEventListener('keydown', handleFirstUserGesture);
+      // Remove after first gesture — audio is now unlocked for this session
+      window.removeEventListener('click', onFirstGesture);
+      window.removeEventListener('touchstart', onFirstGesture);
+      window.removeEventListener('keydown', onFirstGesture);
     };
 
-    // Try starting immediately
-    startAudio();
+    // iOS Safari kills audio when the app goes to background; resume on tab focus
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible' && !userPausedRef.current && audioRef.current?.paused) {
+        tryPlay();
+      }
+    };
 
-    // Listen for first interaction if initial play was blocked
-    window.addEventListener('click', handleFirstUserGesture);
-    window.addEventListener('touchstart', handleFirstUserGesture);
-    window.addEventListener('keydown', handleFirstUserGesture);
+    tryPlay();
+    // passive:false needed so iOS doesn't cancel touchstart before play() runs
+    window.addEventListener('click', onFirstGesture);
+    window.addEventListener('touchstart', onFirstGesture, { passive: false });
+    window.addEventListener('keydown', onFirstGesture);
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
-      window.removeEventListener('click', handleFirstUserGesture);
-      window.removeEventListener('touchstart', handleFirstUserGesture);
-      window.removeEventListener('keydown', handleFirstUserGesture);
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
+      window.removeEventListener('click', onFirstGesture);
+      window.removeEventListener('touchstart', onFirstGesture);
+      window.removeEventListener('keydown', onFirstGesture);
+      document.removeEventListener('visibilitychange', onVisibility);
+      audioRef.current?.pause();
+      audioRef.current = null;
     };
   }, [audioSrc]);
 
   function toggleMusic(e: MouseEvent<HTMLButtonElement>) {
-    e.stopPropagation(); // Stop event from bubbling to window gesture listener
+    e.stopPropagation(); // prevent bubbling to onFirstGesture
     if (!audioRef.current) return;
 
     if (isPlaying) {
-      // User wants to pause music
-      userManuallyPausedRef.current = true;
+      userPausedRef.current = true;
       setIsPlaying(false);
-
-      if (playPromiseRef.current) {
-        playPromiseRef.current.then(() => {
-          audioRef.current?.pause();
-        }).catch(() => {
-          audioRef.current?.pause();
-        });
-      } else {
-        audioRef.current.pause();
-      }
+      // Wait for any pending play() promise before pausing (required by browsers)
+      playPromiseRef.current
+        ?.then(() => audioRef.current?.pause())
+        .catch(() => audioRef.current?.pause());
     } else {
-      // User wants to play music
-      userManuallyPausedRef.current = false;
+      userPausedRef.current = false;
       playPromiseRef.current = audioRef.current.play();
       playPromiseRef.current
-        .then(() => {
-          setIsPlaying(true);
-        })
+        .then(() => setIsPlaying(true))
         .catch((err) => {
           console.warn('Audio play error:', err);
           setIsPlaying(false);
         });
     }
   }
+
 
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });

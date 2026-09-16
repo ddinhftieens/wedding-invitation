@@ -4,20 +4,27 @@ import { GuestsPage } from './pages/GuestsPage';
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   useEffect(() => {
-    const handlePopState = () => {
+    const handleLocationChange = () => {
       setCurrentPath(window.location.pathname);
+      setCurrentHash(window.location.hash);
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
-  // Check if pathname ends with /guests or contains guests
+  // Check if pathname ends with /guests or hash is #guests / #/guests
   const isGuestsRoute =
     currentPath.endsWith('/guests') ||
     currentPath.endsWith('/guests/') ||
-    window.location.hash === '#/guests';
+    currentHash === '#/guests' ||
+    currentHash === '#guests';
 
   if (isGuestsRoute) {
     return <GuestsPage />;

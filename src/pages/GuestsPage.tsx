@@ -34,7 +34,8 @@ export function GuestsPage() {
 
   // Tạo URL thiệp mời điện tử kèm tất cả query params (bao gồm cả id)
   const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ddinhftieens.github.io';
-  const baseUrl = `${origin}/wedding-invitation/`;
+  const base = import.meta.env.BASE_URL || '/';
+  const baseUrl = `${origin}${base.endsWith('/') ? base : `${base}/`}`;
   const params = new URLSearchParams();
   params.set('id', guestId);
   if (form.fullName.trim()) params.set('name', form.fullName.trim());
@@ -100,7 +101,19 @@ export function GuestsPage() {
     <div className={styles.pageContainer}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <a href="/" className={styles.backHome} aria-label="Quay lại thiệp cưới" title="Quay lại trang chủ thiệp cưới">
+          <a
+            href={import.meta.env.BASE_URL}
+            className={styles.backHome}
+            aria-label="Quay lại thiệp cưới"
+            title="Quay lại trang chủ thiệp cưới"
+            onClick={(e) => {
+              if (!e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                e.preventDefault();
+                window.history.pushState({}, '', import.meta.env.BASE_URL);
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }
+            }}
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
