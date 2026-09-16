@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Chữ Song Hỷ (囍) màu đỏ tươi đồng nhất trên tất cả các nét, nền trong suốt -->
+  <g fill="#ff1744">
+    <!-- ═══ NỬA TRÁI (喜) ═══ -->
+    <!-- Nét ngang 1 (trên cùng) -->
+    <rect x="14" y="14" width="31" height="5" rx="1.5" />
+    <!-- Nét dọc đỉnh -->
+    <rect x="27" y="14" width="5" height="14" rx="1" />
+    <!-- Nét ngang 2 -->
+    <rect x="11" y="25" width="37" height="5" rx="1.5" />
+    <!-- Khung 口 trên -->
+    <path d="M15 34 h29 v14 h-29 z M20 38.5 v5 h19 v-5 z" />
+    <!-- Nét ngang giữa -->
+    <rect x="10" y="52" width="38" height="5" rx="1.5" />
+    <!-- 2 chân dọc bên dưới -->
+    <rect x="15" y="55" width="5" height="30" rx="1" />
+    <rect x="39" y="55" width="5" height="30" rx="1" />
+    <!-- Khung 口 dưới -->
+    <path d="M15 62 h29 v15 h-29 z M20 67 v5 h19 v-5 z" />
+    <!-- Nét ngang đáy -->
+    <rect x="10" y="81.5" width="38" height="5.5" rx="1.5" />
+
+    <!-- ═══ NỬA PHẢI (喜) ═══ -->
+    <!-- Nét ngang 1 (trên cùng) -->
+    <rect x="55" y="14" width="31" height="5" rx="1.5" />
+    <!-- Nét dọc đỉnh -->
+    <rect x="68" y="14" width="5" height="14" rx="1" />
+    <!-- Nét ngang 2 -->
+    <rect x="52" y="25" width="37" height="5" rx="1.5" />
+    <!-- Khung 口 trên -->
+    <path d="M56 34 h29 v14 h-29 z M61 38.5 v5 h19 v-5 z" />
+    <!-- Nét ngang giữa -->
+    <rect x="52" y="52" width="38" height="5" rx="1.5" />
+    <!-- 2 chân dọc bên dưới -->
+    <rect x="56" y="55" width="5" height="30" rx="1" />
+    <rect x="80" y="55" width="5" height="30" rx="1" />
+    <!-- Khung 口 dưới -->
+    <path d="M56 62 h29 v15 h-29 z M61 67 v5 h19 v-5 z" />
+    <!-- Nét ngang đáy -->
+    <rect x="52" y="81.5" width="38" height="5.5" rx="1.5" />
+  </g>
+</svg>

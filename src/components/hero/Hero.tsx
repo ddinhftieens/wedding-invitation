@@ -21,6 +21,35 @@ export function Hero() {
       <div className={styles.container}>
         {/* Main content */}
         <div className={styles.content}>
+          <div className={`${styles.hyBadge} animate-fade-up delay-100`} aria-label="Song Hỷ">
+            <svg
+              className={styles.hyIcon}
+              viewBox="0 0 100 100"
+              fill="#ff1744"
+              aria-hidden="true"
+            >
+              <rect x="14" y="14" width="31" height="5" rx="1.5" />
+              <rect x="27" y="14" width="5" height="14" rx="1" />
+              <rect x="11" y="25" width="37" height="5" rx="1.5" />
+              <path d="M15 34 h29 v14 h-29 z M20 38.5 v5 h19 v-5 z" />
+              <rect x="10" y="52" width="38" height="5" rx="1.5" />
+              <rect x="15" y="55" width="5" height="30" rx="1" />
+              <rect x="39" y="55" width="5" height="30" rx="1" />
+              <path d="M15 62 h29 v15 h-29 z M20 67 v5 h19 v-5 z" />
+              <rect x="10" y="81.5" width="38" height="5.5" rx="1.5" />
+
+              <rect x="55" y="14" width="31" height="5" rx="1.5" />
+              <rect x="68" y="14" width="5" height="14" rx="1" />
+              <rect x="52" y="25" width="37" height="5" rx="1.5" />
+              <path d="M56 34 h29 v14 h-29 z M61 38.5 v5 h19 v-5 z" />
+              <rect x="52" y="52" width="38" height="5" rx="1.5" />
+              <rect x="56" y="55" width="5" height="30" rx="1" />
+              <rect x="80" y="55" width="5" height="30" rx="1" />
+              <path d="M56 62 h29 v15 h-29 z M61 67 v5 h19 v-5 z" />
+              <rect x="52" y="81.5" width="38" height="5.5" rx="1.5" />
+            </svg>
+          </div>
+
           <p className={`${styles.dateTag} animate-fade-up delay-200`}>
             Chủ Nhật • xx / xx / 20xx
           </p>
