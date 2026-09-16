@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { SectionTitle } from '../ui/SectionTitle';
-import { WEDDING_PHOTOS } from '../../constants/wedding';
+import { WEDDING_PHOTO_ITEMS } from '../../constants/wedding';
 import styles from './Gallery.module.css';
 
 export function Gallery() {
@@ -16,12 +16,12 @@ export function Gallery() {
 
   const showNext = useCallback(() => {
     if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev !== null ? (prev + 1) % WEDDING_PHOTOS.length : 0));
+    setSelectedIndex((prev) => (prev !== null ? (prev + 1) % WEDDING_PHOTO_ITEMS.length : 0));
   }, [selectedIndex]);
 
   const showPrev = useCallback(() => {
     if (selectedIndex === null) return;
-    setSelectedIndex((prev) => (prev !== null ? (prev - 1 + WEDDING_PHOTOS.length) % WEDDING_PHOTOS.length : 0));
+    setSelectedIndex((prev) => (prev !== null ? (prev - 1 + WEDDING_PHOTO_ITEMS.length) % WEDDING_PHOTO_ITEMS.length : 0));
   }, [selectedIndex]);
 
   // Handle keyboard events (Escape, ArrowLeft, ArrowRight)
@@ -52,9 +52,9 @@ export function Gallery() {
 
         {/* Gallery Grid */}
         <div className={styles.grid}>
-          {WEDDING_PHOTOS.map((src, i) => (
+          {WEDDING_PHOTO_ITEMS.map((photo, i) => (
             <div
-              key={src}
+              key={photo.id}
               className={`${styles.item} reveal`}
               onClick={() => openLightbox(i)}
               role="button"
@@ -65,12 +65,18 @@ export function Gallery() {
               }}
             >
               <div className={styles.imageWrapper}>
-                <img
-                  src={src}
-                  alt={`Ảnh cưới Đình Tiến & Thu Hằng ${i + 1}`}
-                  loading="lazy"
-                  className={styles.img}
-                />
+                <picture>
+                  <source srcSet={photo.thumb} type="image/webp" />
+                  <img
+                    src={photo.thumbFallback}
+                    alt={`Ảnh cưới Đình Tiến & Thu Hằng ${i + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="600"
+                    className={styles.img}
+                  />
+                </picture>
                 <div className={styles.overlay}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <circle cx="11" cy="11" r="8" />
@@ -121,15 +127,19 @@ export function Gallery() {
               </button>
 
               {/* Enlarged Image */}
-              <img
-                src={WEDDING_PHOTOS[selectedIndex]}
-                alt={`Ảnh cưới phóng to ${selectedIndex + 1}`}
-                className={styles.lightboxImg}
-              />
+              <picture>
+                <source srcSet={WEDDING_PHOTO_ITEMS[selectedIndex].full} type="image/webp" />
+                <img
+                  src={WEDDING_PHOTO_ITEMS[selectedIndex].fullFallback}
+                  alt={`Ảnh cưới phóng to ${selectedIndex + 1}`}
+                  className={styles.lightboxImg}
+                  decoding="async"
+                />
+              </picture>
 
               {/* Counter Indicator */}
               <div className={styles.counter}>
-                {selectedIndex + 1} / {WEDDING_PHOTOS.length}
+                {selectedIndex + 1} / {WEDDING_PHOTO_ITEMS.length}
               </div>
             </div>
           </div>

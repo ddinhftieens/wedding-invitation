@@ -102,7 +102,7 @@ export function generateId(): string {
 /** Get a deterministic random photo background based on a seed key */
 export function getCardBgImage(seed: string | number): string {
   if (!WEDDING_PHOTOS || WEDDING_PHOTOS.length === 0) {
-    return `${import.meta.env.BASE_URL}image/bg.jpg`;
+    return `${import.meta.env.BASE_URL}image/bg.webp`;
   }
   const str = String(seed);
   let hash = 0;

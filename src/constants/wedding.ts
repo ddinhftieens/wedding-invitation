@@ -169,30 +169,26 @@ export const SAMPLE_WISHES: WishItem[] = [
 // ── Wedding Photos ─────────────────────────────────────────────
 const baseUrl = import.meta.env.BASE_URL;
 
-export const WEDDING_PHOTOS: string[] = [
-  `${baseUrl}image/1.jpg`,
-  `${baseUrl}image/2.jpg`,
-  `${baseUrl}image/3.jpg`,
-  `${baseUrl}image/4.jpg`,
-  `${baseUrl}image/5.jpg`,
-  `${baseUrl}image/6.jpg`,
-  `${baseUrl}image/7.jpg`,
-  `${baseUrl}image/8.jpg`,
-  `${baseUrl}image/9.jpg`,
-  `${baseUrl}image/10.jpg`,
-  `${baseUrl}image/11.jpg`,
-  `${baseUrl}image/12.jpg`,
-  `${baseUrl}image/13.jpg`,
-  `${baseUrl}image/14.jpg`,
-  `${baseUrl}image/15.jpg`,
-  `${baseUrl}image/16.jpg`,
-  `${baseUrl}image/17.jpg`,
-  `${baseUrl}image/18.jpg`,
-  `${baseUrl}image/19.jpg`,
-  `${baseUrl}image/20.jpg`,
-  `${baseUrl}image/21.jpg`,
-  `${baseUrl}image/22.jpg`,
-  `${baseUrl}image/23.jpg`,
-  `${baseUrl}image/24.jpg`,
-  `${baseUrl}image/25.jpg`
-];
+export interface WeddingPhotoItem {
+  id: number;
+  full: string;       // WebP
+  fullFallback: string; // JPG fallback
+  thumb: string;      // WebP thumbnail
+  thumbFallback: string; // JPG thumbnail fallback
+}
+
+export const WEDDING_PHOTO_ITEMS: WeddingPhotoItem[] = Array.from({ length: 25 }, (_, i) => {
+  const index = i + 1;
+  return {
+    id: index,
+    // WebP (modern, ~30–40% lighter) — Gallery uses <picture> to fallback to .jpg
+    full: `${baseUrl}image/${index}.webp`,
+    fullFallback: `${baseUrl}image/${index}.jpg`,
+    thumb: `${baseUrl}image/thumbnails/${index}.webp`,
+    thumbFallback: `${baseUrl}image/thumbnails/${index}.jpg`,
+  };
+});
+
+// Giữ lại mảng WEDDING_PHOTOS tương thích ngược với code cũ
+export const WEDDING_PHOTOS: string[] = WEDDING_PHOTO_ITEMS.map((item) => item.full);
+
