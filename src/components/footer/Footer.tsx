@@ -18,7 +18,11 @@ export function Footer() {
           </svg>
         ))}
       </div>
-      <p className={styles.names}>Đình Tiến &amp; Thu Hằng</p>
+      <p className={styles.names}>
+        <span>Đình Tiến</span>
+        <span className={styles.ampersand}>&amp;</span>
+        <span>Thu Hằng</span>
+      </p>
       <p className={styles.date}>xx · xx · 20xx</p>
       <blockquote className={styles.quote}>
         "Gặp được em là điều may mắn, được cùng em đi hết cuộc đời là điều anh mong"

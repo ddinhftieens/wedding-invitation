@@ -1,4 +1,6 @@
-.header { text-align: center; }
+.header {
+  text-align: center;
+}
 
 .note {
   font-size: var(--text-sm);
@@ -17,7 +19,9 @@
 }
 
 @media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ── Card ── */
@@ -61,7 +65,11 @@
 }
 
 /* ── Rows ── */
-.rows { display: flex; flex-direction: column; gap: 0; }
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
 
 .row {
   display: flex;
@@ -70,7 +78,10 @@
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--border-soft);
 }
-.row:last-child { border-bottom: none; }
+
+.row:last-child {
+  border-bottom: none;
+}
 
 .rowLabel {
   font-size: var(--text-xs);
@@ -86,5 +97,6 @@
   color: var(--text-primary);
   text-align: right;
   line-height: 1.6;
-  white-space: pre-line; /* show newlines in representative names */
+  white-space: pre-line;
+  /* show newlines in representative names */
 }

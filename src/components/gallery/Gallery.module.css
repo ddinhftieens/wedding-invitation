@@ -221,12 +221,12 @@
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.75));
 }
 
-.prevBtn { 
-  left: -60px; 
+.prevBtn {
+  left: -60px;
 }
 
-.nextBtn { 
-  right: -60px; 
+.nextBtn {
+  right: -60px;
 }
 
 @media (hover: hover) {
@@ -250,15 +250,20 @@
     background: rgba(0, 0, 0, 0.15);
     color: rgba(255, 255, 255, 0.9);
   }
-  
-  .prevBtn { left: 4px; }
-  .nextBtn { right: 4px; }
-  
-  .closeBtn { 
-    top: 16px; 
-    right: 16px; 
-    width: 40px; 
-    height: 40px; 
+
+  .prevBtn {
+    left: 4px;
+  }
+
+  .nextBtn {
+    right: 4px;
+  }
+
+  .closeBtn {
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -278,8 +283,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleIn {
@@ -287,6 +297,7 @@
     opacity: 0;
     transform: scale(0.92);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -298,6 +309,7 @@
     opacity: 0;
     transform: translateX(45px) scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);
@@ -309,6 +321,7 @@
     opacity: 0;
     transform: translateX(-45px) scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0) scale(1);

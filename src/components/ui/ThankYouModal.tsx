@@ -57,9 +57,11 @@ export function ThankYouModal({
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.message}>{message}</p>
 
-        <div className={styles.divider} />
-
-        <p className={styles.signature}>Đình Tiến &amp; Thu Hằng</p>
+        <p className={styles.signature}>
+          <span>Đình Tiến</span>
+          <span className={styles.ampersand}>&amp;</span>
+          <span>Thu Hằng</span>
+        </p>
 
         <div className={styles.actions}>
           <Button variant="primary" onClick={onClose} fullWidth id="close-thankyou-modal">

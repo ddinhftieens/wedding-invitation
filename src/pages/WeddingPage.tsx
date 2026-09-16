@@ -77,7 +77,6 @@ export function WeddingPage() {
       <Gallery />
       <RSVP />
       <Wishes />
-      {/* <Gift /> - Đã ẩn phần mừng cưới */}
       <Footer />
       <FloatingButtons />
     </main>

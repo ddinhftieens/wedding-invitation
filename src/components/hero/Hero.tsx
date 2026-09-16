@@ -22,6 +22,16 @@ export function Hero() {
         {/* Main content */}
         <div className={styles.content}>
           <div className={`${styles.hyBadge} animate-fade-up delay-100`} aria-label="Song Hỷ">
+            <img
+              src={`${import.meta.env.BASE_URL}image/chibi/chibi_couple_welcome.png`}
+              alt="Cô dâu chú rể cầm thiệp chào khách chibi"
+              className={styles.chibiSide}
+            />
+            <img
+              src={`${import.meta.env.BASE_URL}image/chibi/chibi_couple_heart.png`}
+              alt="Cô dâu chú rể bắn tim chibi"
+              className={styles.chibiSide}
+            />
             <svg
               className={styles.hyIcon}
               viewBox="0 0 100 100"
@@ -48,6 +58,16 @@ export function Hero() {
               <path d="M56 62 h29 v15 h-29 z M61 67 v5 h19 v-5 z" />
               <rect x="52" y="81.5" width="38" height="5.5" rx="1.5" />
             </svg>
+            <img
+              src={`${import.meta.env.BASE_URL}image/chibi/chibi_couple_kiss.png`}
+              alt="Chú rể hôn má cô dâu chibi"
+              className={styles.chibiSide}
+            />
+            <img
+              src={`${import.meta.env.BASE_URL}image/chibi/chibi_couple_piggyback.png`}
+              alt="Chú rể cõng cô dâu chibi"
+              className={styles.chibiSide}
+            />
           </div>
 
           <p className={`${styles.dateTag} animate-fade-up delay-200`}>
@@ -67,7 +87,7 @@ export function Hero() {
           </div>
 
           <p className={`${styles.subtitle} animate-fade-up delay-700`}>
-            Trân trọng kính mời <strong style={{ color: 'var(--gold)' }}>{guestName}</strong> đến chung vui trong ngày trọng đại của {hostHonorific}
+            Trân trọng kính mời <strong style={{ color: '#fb7185' }}>{guestName}</strong> đến chung vui trong ngày trọng đại của {hostHonorific}
           </p>
 
           <div className={`${styles.actions} animate-fade-up delay-800`}>

@@ -9,7 +9,8 @@
   content: '';
   position: absolute;
   left: 18px;
-  top: 0; bottom: 0;
+  top: 0;
+  bottom: 0;
   width: 1px;
   background: linear-gradient(to bottom, transparent, var(--border), var(--gold-dark), var(--border), transparent);
 }
@@ -26,7 +27,8 @@
 .item {
   position: relative;
   margin-bottom: var(--space-8);
-  padding-left: 50px; /* space for dot + line */
+  padding-left: 50px;
+  /* space for dot + line */
 }
 
 /* Dot */
@@ -102,8 +104,13 @@
     margin-bottom: var(--space-10);
   }
 
-  .itemLeft  { justify-content: flex-start; }
-  .itemRight { justify-content: flex-end; }
+  .itemLeft {
+    justify-content: flex-start;
+  }
+
+  .itemRight {
+    justify-content: flex-end;
+  }
 
   .dot {
     left: 50%;
@@ -111,7 +118,9 @@
     transform: translateX(-50%);
   }
 
-  .card { width: 44%; }
+  .card {
+    width: 44%;
+  }
 }
 
 /* ── Card content ── */

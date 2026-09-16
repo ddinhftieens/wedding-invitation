@@ -9,7 +9,8 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  flex-wrap: nowrap; /* Always keep 4 boxes in 1 horizontal row */
+  flex-wrap: nowrap;
+  /* Always keep 4 boxes in 1 horizontal row */
   width: 100%;
 }
 
@@ -91,6 +92,7 @@
 
 @media (max-width: 360px) {
   .sep {
-    display: none; /* Hide colons on extremely narrow screens to save space */
+    display: none;
+    /* Hide colons on extremely narrow screens to save space */
   }
 }
