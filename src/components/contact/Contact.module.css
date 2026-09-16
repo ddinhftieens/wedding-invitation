@@ -21,7 +21,7 @@
 
 .card {
   background: var(--bg-card);
-  border: 1px solid var(--border-soft);
+  border: 1px solid rgba(251, 113, 133, 0.16);
   border-radius: var(--radius-lg);
   padding: var(--space-6) var(--space-4);
   display: flex;
@@ -36,13 +36,15 @@
 @media (hover: hover) {
   .card:hover {
     transform: translateY(-4px);
-    border-color: var(--border);
-    box-shadow: var(--shadow-card);
+    border-color: rgba(251, 113, 133, 0.45);
+    box-shadow: 0 12px 35px rgba(251, 113, 133, 0.25);
   }
 
   .card:hover .iconCircle {
-    background: var(--gold);
-    color: #0e0e0e;
+    background: #fb7185;
+    color: #ffffff;
+    border-color: #fb7185;
+    transform: scale(1.08);
   }
 }
 
@@ -50,14 +52,15 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid var(--border);
-  color: var(--gold);
+  background: rgba(251, 113, 133, 0.12);
+  border: 1px solid rgba(251, 113, 133, 0.3);
+  color: #ffffff;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-4);
-  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
 }
 
 .label {
@@ -71,8 +74,9 @@
   font-family: var(--font-sans);
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--gold);
+  color: #fb7185;
   letter-spacing: 0.04em;
+  text-shadow: 0 0 12px rgba(251, 113, 133, 0.25);
 }
 
 @media (max-width: 540px) {

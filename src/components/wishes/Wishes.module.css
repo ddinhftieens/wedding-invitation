@@ -163,3 +163,20 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+.submitIcon {
+  color: #fb7185;
+  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.55));
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.submitText {
+  color: #fb7185;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+:global(#submit-wish):hover .submitIcon {
+  transform: scale(1.18);
+}

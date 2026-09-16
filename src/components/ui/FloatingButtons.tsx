@@ -126,7 +126,7 @@ export function FloatingButtons({ audioSrc }: Props) {
         id="music-toggle-btn"
       >
         <svg
-          className={isPlaying ? styles.spinIcon : ''}
+          className={`${styles.musicIcon} ${isPlaying ? styles.spinIcon : ''}`}
           width="16"
           height="16"
           viewBox="0 0 24 24"

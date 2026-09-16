@@ -155,25 +155,37 @@
 }
 
 .rsvpIcon {
-  color: var(--gold, #38bdf8);
-  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.45));
+  color: #fb7185;
+  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.6));
   flex-shrink: 0;
   transition: transform var(--transition);
+}
+
+.rsvpText {
+  color: #fb7185;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .wishesIcon {
   color: #fb7185;
-  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.45));
+  filter: drop-shadow(0 0 6px rgba(251, 113, 133, 0.65));
   flex-shrink: 0;
   transition: transform var(--transition);
 }
 
+.wishesText {
+  color: #fb7185;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .actions > *:hover .rsvpIcon {
-  transform: scale(1.12);
+  transform: scale(1.15);
 }
 
 .actions > *:hover .wishesIcon {
-  transform: scale(1.18);
+  transform: scale(1.15);
 }
 
 /* ── Info card wrapper ── */
