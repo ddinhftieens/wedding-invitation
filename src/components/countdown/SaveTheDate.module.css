@@ -113,13 +113,12 @@
   transform: scale(1.05);
 }
 
-.heartBadge::after {
-  content: '❤️';
+.calendarHeart {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  font-size: 13px;
-  animation: pulse 2s infinite ease-in-out;
+  top: -7px;
+  right: -7px;
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.8));
+  animation: pulse 2.5s infinite ease-in-out;
 }
 
 .divider {
@@ -142,6 +141,6 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.15);
   }
 }

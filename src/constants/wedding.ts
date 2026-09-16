@@ -11,7 +11,7 @@ export const WEDDING = {
   brideFullName: 'Nguyễn Thị Thu Hằng',
 
   // Wedding ceremony
-  ceremonyDate: new Date('2026-09-14'),
+  ceremonyDate: new Date('2026-12-09'),
   ceremonyDateLabel: 'Chủ nhật xx / xx / 20xx',
   ceremonyTime: 'xx:00',
   ceremonyLunar: 'Âm Lịch: xx tháng xx năm xxxx',

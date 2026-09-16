@@ -6,17 +6,21 @@
 }
 
 .hearts {
-  font-size: 1.1rem;
-  color: #ef4444;
-  letter-spacing: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   margin-bottom: var(--space-5);
+}
+
+.heartIcon {
+  filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.7));
   animation: pulse 2.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.1); }
+  50%       { transform: scale(1.15); }
 }
 
 .names {
