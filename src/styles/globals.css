@@ -181,7 +181,7 @@ textarea {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gold);
+  background: #ff1744;
 }
 
 /* ---------- Selection ---------- */
