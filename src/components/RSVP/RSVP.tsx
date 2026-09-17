@@ -136,12 +136,12 @@ export function RSVP() {
                 disabled={form.option === 'no' || isSubmitting}
               >
                 <option value={0}>Chỉ mình tôi</option>
-                <option value={1}>1 người</option>
-                <option value={2}>2 người</option>
-                <option value={3}>3 người</option>
-                <option value={4}>4 người</option>
-                <option value={5}>5 người</option>
-                <option value={6}>6 người</option>
+                <option value={1}>+ 1 người</option>
+                <option value={2}>+ 2 người</option>
+                <option value={3}>+ 3 người</option>
+                <option value={4}>+ 4 người</option>
+                <option value={5}>+ 5 người</option>
+                <option value={6}>+ 6 người</option>
               </select>
             </div>
           </div>
