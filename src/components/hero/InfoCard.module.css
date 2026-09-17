@@ -137,18 +137,6 @@
 }
 .actionBtn:active::before { transform: translateX(0); }
 
-.iconCircle {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform var(--transition), background var(--transition);
-}
-
 .galleryIcon {
   color: #ffffff;
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.55));
@@ -171,11 +159,6 @@
     background: rgba(255, 255, 255, 0.18);
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2);
-  }
-
-  .actionBtn:hover .iconCircle {
-    transform: scale(1.15);
-    background: rgba(255, 255, 255, 0.22);
   }
 
   .actionBtn:hover .galleryIcon {
