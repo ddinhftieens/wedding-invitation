@@ -23,7 +23,7 @@ export function FloatingButtons({ audioSrc }: Props) {
   // Audio engine
   useEffect(() => {
     const src = audioSrc
-      || `${import.meta.env.BASE_URL}mp3/i_do.mp3`.replace(/([^:]\/)\/+/g, '$1');
+      || `${import.meta.env.BASE_URL}mp3/a_thousand_years.mp3`.replace(/([^:]\/)\/+/g, '$1');
 
     const audio = new Audio(src);
     audio.loop = true;
