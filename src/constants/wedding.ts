@@ -166,7 +166,7 @@ export const SAMPLE_WISHES: WishItem[] = [
   },
 ];
 
-// ── Wedding Photos ─────────────────────────────────────────────
+// ── Wedding Photos (GalleryGrid masonry) ───────────────────────
 const baseUrl = import.meta.env.BASE_URL;
 
 export interface WeddingPhotoItem {
@@ -177,6 +177,7 @@ export interface WeddingPhotoItem {
   thumbFallback: string; // JPG thumbnail fallback
 }
 
+/** Dùng cho GalleryGrid (masonry grid) — toàn bộ 25 ảnh cưới */
 export const WEDDING_PHOTO_ITEMS: WeddingPhotoItem[] = Array.from({ length: 25 }, (_, i) => {
   const index = i + 1;
   return {
@@ -191,4 +192,17 @@ export const WEDDING_PHOTO_ITEMS: WeddingPhotoItem[] = Array.from({ length: 25 }
 
 // Giữ lại mảng WEDDING_PHOTOS tương thích ngược với code cũ
 export const WEDDING_PHOTOS: string[] = WEDDING_PHOTO_ITEMS.map((item) => item.full);
+
+/** Dùng cho Gallery carousel 3D — tách riêng để có thể curate ảnh độc lập.
+ *  Thay đổi danh sách id bên dưới để chọn ảnh xuất hiện trong carousel. */
+const CAROUSEL_PHOTO_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
+
+export const CAROUSEL_PHOTO_ITEMS: WeddingPhotoItem[] = CAROUSEL_PHOTO_IDS.map((index) => ({
+  id: index,
+  full: `${baseUrl}image/${index}.webp`,
+  fullFallback: `${baseUrl}image/${index}.jpg`,
+  thumb: `${baseUrl}image/thumbnails/${index}.webp`,
+  thumbFallback: `${baseUrl}image/thumbnails/${index}.jpg`,
+}));
+
 

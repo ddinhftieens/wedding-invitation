@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  overflow-x: clip;
   background:
     linear-gradient(180deg, rgba(9, 13, 22, 0.84) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(9, 13, 22, 0.96) 100%),
     radial-gradient(ellipse 70% 60% at 20% 50%, rgba(244, 63, 94, 0.22) 0%, transparent 70%),
@@ -50,17 +51,17 @@
   z-index: 1;
 }
 
-/* ── Container (CSS Grid for robust layout) ── */
+/* ── Container (Centered Flex for Mobile) ── */
 .container {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-8);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: var(--space-8);
 }
 
 /* ── Content ── */
@@ -127,21 +128,22 @@
 
 @media (max-width: 600px) {
   .hyBadge {
-    width: calc(100% + 20px);
-    margin-left: -10px;
-    margin-right: -10px;
-    gap: -14px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    gap: clamp(2px, 1.2vw, 6px);
   }
 
   .chibiSide {
-    width: 82px;
-    height: 94px;
+    width: clamp(52px, 15vw, 68px);
+    max-height: 80px;
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
   }
 
   .hyIcon {
-    width: 48px;
-    height: 48px;
+    width: clamp(40px, 11vw, 50px);
+    height: clamp(40px, 11vw, 50px);
   }
 }
 
@@ -263,6 +265,10 @@
 /* ── Info card wrapper ── */
 .cardWrapper {
   width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
 
 /* ── Desktop Grid Layout (>= 900px) ── */
@@ -274,8 +280,10 @@
 
   .container {
     max-width: 1320px;
+    display: grid;
     grid-template-columns: 1fr 420px;
     gap: 48px;
+    align-items: center;
   }
 
   .content {
@@ -303,5 +311,6 @@
     width: 100%;
     max-width: 420px;
     justify-self: end;
+    margin: 0;
   }
 }

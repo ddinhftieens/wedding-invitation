@@ -1,14 +1,130 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { SectionTitle } from '../ui/SectionTitle';
-import { WEDDING_PHOTO_ITEMS } from '../../constants/wedding';
+import { CAROUSEL_PHOTO_ITEMS, WEDDING_PHOTO_ITEMS } from '../../constants/wedding';
 import styles from './Gallery.module.css';
+import gridStyles from './GalleryGrid.module.css';
+
+const VISIBLE_SIDE = 3; // 3 cards visible on each side (total 7 visible across full width)
 
 export function Gallery() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [direction, setDirection] = useState<'next' | 'prev' | null>(null);
+  // ── Carousel state ──
+  const [activeIndex, setActiveIndex] = useState(0);
+  const total = CAROUSEL_PHOTO_ITEMS.length;
   const touchStartXRef = useRef<number | null>(null);
   const touchStartYRef = useRef<number | null>(null);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // ── Grid / Lightbox state ──
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [direction, setDirection] = useState<'next' | 'prev' | null>(null);
+  const gridTouchStartXRef = useRef<number | null>(null);
+  const gridTouchStartYRef = useRef<number | null>(null);
+
+  // ── Carousel navigation ──
+  const goPrev = useCallback(() => {
+    setActiveIndex((i) => (i - 1 + total) % total);
+  }, [total]);
+
+  const goNext = useCallback(() => {
+    setActiveIndex((i) => (i + 1) % total);
+  }, [total]);
+
+  const resetAutoPlay = useCallback(() => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    autoPlayRef.current = setInterval(goNext, 3800);
+  }, [goNext]);
+
+  useEffect(() => {
+    resetAutoPlay();
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
+  }, [resetAutoPlay]);
+
+  const handleNav = useCallback(
+    (dir: 'prev' | 'next') => {
+      if (dir === 'prev') goPrev();
+      else goNext();
+      resetAutoPlay();
+    },
+    [goPrev, goNext, resetAutoPlay]
+  );
+
+  // Touch swipe for carousel
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartXRef.current;
+    const dy = e.changedTouches[0].clientY - touchStartYRef.current;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) handleNav('next');
+      else handleNav('prev');
+    }
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+  };
+
+  // Keyboard navigation for carousel when lightbox is closed
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (selectedIndex !== null) return; // Lightbox handles keyboard when open
+      if (e.key === 'ArrowLeft') handleNav('prev');
+      if (e.key === 'ArrowRight') handleNav('next');
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [handleNav, selectedIndex]);
+
+  // Preload neighbours for carousel
+  useEffect(() => {
+    [-3, -2, -1, 1, 2, 3].forEach((off) => {
+      const idx = (activeIndex + off + total) % total;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = CAROUSEL_PHOTO_ITEMS[idx]?.full;
+    });
+  }, [activeIndex, total]);
+
+  const getOffset = (index: number) => {
+    let o = index - activeIndex;
+    if (o > total / 2) o -= total;
+    if (o < -total / 2) o += total;
+    return o;
+  };
+
+  const getCardStyle = (index: number): React.CSSProperties => {
+    const offset = getOffset(index);
+    const abs = Math.abs(offset);
+    if (abs > VISIBLE_SIDE) return { display: 'none' };
+
+    const sign = offset < 0 ? -1 : offset > 0 ? 1 : 0;
+    const pct = abs === 0 ? 0 : abs === 1 ? 54 : abs === 2 ? 102 : 146;
+    const vw = abs === 0 ? 0 : abs === 1 ? 2.5 : abs === 2 ? 5.5 : 9;
+    const scale = abs === 0 ? 1 : abs === 1 ? 0.88 : abs === 2 ? 0.75 : 0.63;
+    const rotateY = sign * (abs === 1 ? 22 : abs === 2 ? 34 : 44);
+    const opacity = abs === 0 ? 1 : abs === 1 ? 0.95 : abs === 2 ? 0.80 : 0.55;
+    const filter = abs === 0 ? 'none' : `brightness(${abs === 1 ? 0.95 : abs === 2 ? 0.88 : 0.80})`;
+    const zIndex = abs === 0 ? 10 : 8 - abs * 2;
+
+    const transform =
+      abs === 0
+        ? 'perspective(1200px) scale(1)'
+        : `perspective(1200px) translateX(${sign * pct}%) translateX(${sign * vw}vw) scale(${scale}) rotateY(${rotateY}deg)`;
+
+    return {
+      transform,
+      opacity,
+      filter,
+      zIndex,
+      pointerEvents: abs === 0 ? 'auto' : 'none',
+    };
+  };
+
+  // ── Lightbox actions ──
   const openLightbox = (index: number) => {
     setDirection(null);
     setSelectedIndex(index);
@@ -30,18 +146,16 @@ export function Gallery() {
     setSelectedIndex((prev) => (prev !== null ? (prev - 1 + WEDDING_PHOTO_ITEMS.length) % WEDDING_PHOTO_ITEMS.length : 0));
   }, [selectedIndex]);
 
-  // Touch swipe handling (swipe left for next, swipe right for prev)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartXRef.current = e.touches[0].clientX;
-    touchStartYRef.current = e.touches[0].clientY;
+  // Touch swipe handling for lightbox
+  const handleGridTouchStart = (e: React.TouchEvent) => {
+    gridTouchStartXRef.current = e.touches[0].clientX;
+    gridTouchStartYRef.current = e.touches[0].clientY;
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
-    const deltaX = touchEndX - touchStartXRef.current;
-    const deltaY = touchEndY - touchStartYRef.current;
+  const handleGridTouchEnd = (e: React.TouchEvent) => {
+    if (gridTouchStartXRef.current === null || gridTouchStartYRef.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - gridTouchStartXRef.current;
+    const deltaY = e.changedTouches[0].clientY - gridTouchStartYRef.current;
     const minSwipeDistance = 45;
 
     if (Math.abs(deltaX) > minSwipeDistance && Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -52,37 +166,11 @@ export function Gallery() {
       }
     }
 
-    touchStartXRef.current = null;
-    touchStartYRef.current = null;
+    gridTouchStartXRef.current = null;
+    gridTouchStartYRef.current = null;
   };
 
-  // Background preload all high-res photos when browser is idle (zero initial lag)
-  useEffect(() => {
-    const preloadAll = () => {
-      WEDDING_PHOTO_ITEMS.forEach((photo) => {
-        const img = new Image();
-        img.decoding = 'async';
-        img.src = photo.full;
-      });
-    };
-
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        const idleId = (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
-          preloadAll,
-          { timeout: 2500 }
-        );
-        return () => {
-          (window as unknown as { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleId);
-        };
-      } else {
-        const timerId = setTimeout(preloadAll, 1200);
-        return () => clearTimeout(timerId);
-      }
-    }
-  }, []);
-
-  // Prioritize preloading adjacent photos immediately when lightbox is opened
+  // Preload adjacent photos when lightbox is open
   useEffect(() => {
     if (selectedIndex === null) return;
     const nextIdx = (selectedIndex + 1) % WEDDING_PHOTO_ITEMS.length;
@@ -96,7 +184,7 @@ export function Gallery() {
     });
   }, [selectedIndex]);
 
-  // Handle keyboard events (Escape, ArrowLeft, ArrowRight)
+  // Keyboard navigation for lightbox
   useEffect(() => {
     if (selectedIndex === null) return;
 
@@ -106,7 +194,6 @@ export function Gallery() {
       if (e.key === 'ArrowLeft') showPrev();
     };
 
-    // Lock body scroll when modal is open
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
 
@@ -116,7 +203,7 @@ export function Gallery() {
     };
   }, [selectedIndex, showNext, showPrev]);
 
-  const preloadImage = (index: number) => {
+  const preloadGridImage = (index: number) => {
     const photo = WEDDING_PHOTO_ITEMS[index];
     if (photo) {
       const img = new Image();
@@ -126,19 +213,90 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery">
+    <section id="gallery" className={styles.carouselSection}>
       <div className="section-wrapper section-wrapper--wide">
         <SectionTitle>Ảnh cưới</SectionTitle>
-        <p className={styles.subtext}>Nhấn vào ảnh để xem chi tiết phóng to</p>
 
-        {/* Gallery Grid */}
-        <div className={styles.grid}>
+        {/* ── 3D Carousel Stage ── */}
+        <div
+          className={styles.carouselStage}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className={styles.carouselTrack}>
+            {CAROUSEL_PHOTO_ITEMS.map((photo, i) => {
+              const cardStyle = getCardStyle(i);
+              if (cardStyle.display === 'none') return null;
+              const offset = getOffset(i);
+              const isActive = offset === 0;
+
+              return (
+                <div
+                  key={photo.id}
+                  className={`${styles.card} ${isActive ? styles.cardActive : styles.cardSide}`}
+                  style={cardStyle}
+                  onClick={() => {
+                    if (!isActive) {
+                      setActiveIndex(i);
+                      resetAutoPlay();
+                    }
+                  }}
+                  role={isActive ? undefined : 'button'}
+                  aria-label={isActive ? undefined : `Xem ảnh ${i + 1}`}
+                >
+                  <div className={styles.cardInner}>
+                    <picture>
+                      <source
+                        srcSet={isActive ? photo.full : photo.thumb}
+                        type="image/webp"
+                      />
+                      <img
+                        src={isActive ? photo.fullFallback : photo.thumbFallback}
+                        alt={`Ảnh cưới Đình Tiến & Thu Hằng ${i + 1}`}
+                        className={styles.cardImg}
+                        loading={Math.abs(offset) <= 1 ? 'eager' : 'lazy'}
+                        decoding="async"
+                        draggable={false}
+                      />
+                    </picture>
+                    {isActive && <div className={styles.cardShine} />}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ── Dot indicators ── */}
+        <div className={styles.dots} role="tablist" aria-label="Chọn ảnh">
+          {CAROUSEL_PHOTO_ITEMS.map((photo, i) => (
+            <button
+              key={photo.id}
+              className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
+              onClick={() => {
+                setActiveIndex(i);
+                resetAutoPlay();
+              }}
+              role="tab"
+              aria-selected={i === activeIndex}
+              aria-label={`Ảnh ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* ── Subtitle for grid gallery ── */}
+        <p className={gridStyles.subtext} style={{ marginTop: 'var(--space-8)' }}>
+          Nhấn vào ảnh để xem chi tiết phóng to
+        </p>
+
+        {/* ── Photo Grid ── */}
+        <div className={gridStyles.grid}>
           {WEDDING_PHOTO_ITEMS.map((photo, i) => (
             <div
               key={photo.id}
-              className={`${styles.item} reveal`}
+              className={`${gridStyles.item} reveal`}
               onClick={() => openLightbox(i)}
-              onMouseEnter={() => preloadImage(i)}
+              onMouseEnter={() => preloadGridImage(i)}
               role="button"
               tabIndex={0}
               aria-label={`Xem ảnh cưới ${i + 1}`}
@@ -146,7 +304,7 @@ export function Gallery() {
                 if (e.key === 'Enter' || e.key === ' ') openLightbox(i);
               }}
             >
-              <div className={styles.imageWrapper}>
+              <div className={gridStyles.imageWrapper}>
                 <picture>
                   <source srcSet={photo.thumb} type="image/webp" />
                   <img
@@ -156,10 +314,10 @@ export function Gallery() {
                     decoding="async"
                     width="400"
                     height="600"
-                    className={styles.img}
+                    className={gridStyles.img}
                   />
                 </picture>
-                <div className={styles.overlay}>
+                <div className={gridStyles.overlay}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <circle cx="11" cy="11" r="8" />
                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -172,21 +330,20 @@ export function Gallery() {
           ))}
         </div>
 
-        {/* Lightbox Modal */}
+        {/* ── Lightbox Modal ── */}
         {selectedIndex !== null && (
           <div
-            className={styles.lightbox}
+            className={gridStyles.lightbox}
             onClick={closeLightbox}
             role="dialog"
             aria-modal="true"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
+            onTouchStart={handleGridTouchStart}
+            onTouchEnd={handleGridTouchEnd}
           >
-            <div className={styles.lightboxOverlay} />
+            <div className={gridStyles.lightboxOverlay} />
 
-            {/* Close Button */}
             <button
-              className={styles.closeBtn}
+              className={gridStyles.closeBtn}
               onClick={closeLightbox}
               aria-label="Đóng xem ảnh"
               title="Đóng (ESC)"
@@ -197,10 +354,9 @@ export function Gallery() {
               </svg>
             </button>
 
-            <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-              {/* Prev Button */}
+            <div className={gridStyles.lightboxContent} onClick={(e) => e.stopPropagation()}>
               <button
-                className={`${styles.navBtn} ${styles.prevBtn}`}
+                className={`${gridStyles.navBtn} ${gridStyles.prevBtn}`}
                 onClick={showPrev}
                 aria-label="Ảnh trước"
                 title="Ảnh trước (←)"
@@ -210,9 +366,8 @@ export function Gallery() {
                 </svg>
               </button>
 
-              {/* Next Button */}
               <button
-                className={`${styles.navBtn} ${styles.nextBtn}`}
+                className={`${gridStyles.navBtn} ${gridStyles.nextBtn}`}
                 onClick={showNext}
                 aria-label="Ảnh tiếp theo"
                 title="Ảnh tiếp theo (→)"
@@ -222,15 +377,14 @@ export function Gallery() {
                 </svg>
               </button>
 
-              {/* Enlarged Image with dynamic transition */}
               <div
                 key={selectedIndex}
-                className={`${styles.lightboxImgContainer} ${
+                className={`${gridStyles.lightboxImgContainer} ${
                   direction === 'next'
-                    ? styles.slideNext
+                    ? gridStyles.slideNext
                     : direction === 'prev'
-                    ? styles.slidePrev
-                    : styles.zoomIn
+                      ? gridStyles.slidePrev
+                      : gridStyles.zoomIn
                 }`}
               >
                 <picture>
@@ -238,14 +392,13 @@ export function Gallery() {
                   <img
                     src={WEDDING_PHOTO_ITEMS[selectedIndex].fullFallback}
                     alt={`Ảnh cưới phóng to ${selectedIndex + 1}`}
-                    className={styles.lightboxImg}
+                    className={gridStyles.lightboxImg}
                     decoding="async"
                   />
                 </picture>
               </div>
 
-              {/* Counter Indicator */}
-              <div className={styles.counter}>
+              <div className={gridStyles.counter}>
                 {selectedIndex + 1} / {WEDDING_PHOTO_ITEMS.length}
               </div>
             </div>

@@ -10,6 +10,7 @@ import { RSVP } from '../components/RSVP/RSVP';
 import { Wishes } from '../components/wishes/Wishes';
 import { Footer } from '../components/footer/Footer';
 
+
 /**
  * Initialise IntersectionObserver for .reveal elements.
  * Called once on mount; handles all sections globally.
@@ -75,6 +76,7 @@ export function WeddingPage() {
       <Family />
       <Story />
       <Gallery />
+
       <RSVP />
       <Wishes />
       <Footer />

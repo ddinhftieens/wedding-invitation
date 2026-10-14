@@ -1,329 +1,168 @@
-.subtext {
-  text-align: center;
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  margin-top: -var(--space-4);
-  margin-bottom: var(--space-8);
-}
-
-/* ── Dynamic Pinterest-Style Masonry Layout (Gapless & Organic) ── */
-.grid {
-  column-count: 2;
-  column-gap: var(--space-3);
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .grid {
-    column-count: 3;
-    column-gap: var(--space-4);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid {
-    column-count: 4;
-    column-gap: var(--space-4);
-  }
-}
-
-/* ── Grid Item ── */
-.item {
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
-  margin-bottom: var(--space-3);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  cursor: pointer;
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-  position: relative;
-  width: 100%;
-  display: block;
-}
-
-@media (min-width: 640px) {
-  .item {
-    margin-bottom: var(--space-4);
-  }
-}
-
-@media (hover: hover) {
-  .item:hover {
-    transform: translateY(-4px);
-    border-color: var(--gold);
-    box-shadow: var(--shadow-gold);
-  }
-
-  .item:hover .overlay {
-    opacity: 1;
-  }
-
-  .item:hover .img {
-    transform: scale(1.04);
-  }
-}
-
-.imageWrapper {
-  width: 100%;
-  position: relative;
+/* ── Gallery Carousel Section ─────────────────────────────────── */
+.carouselSection {
   overflow: hidden;
 }
 
-.img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.5s var(--ease);
-  object-fit: cover;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(14, 14, 14, 0.4);
-  backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold-light);
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
-/* ── Lightbox Modal ── */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.3s var(--ease) both;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-}
-
-.lightboxOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  touch-action: none;
-}
-
-.lightboxContent {
+/* ── Stage: defines the 3-D perspective viewport ─────────────── */
+.carouselStage {
   position: relative;
-  z-index: 1001;
-  max-width: 90vw;
-  max-height: 90vh;
+  /* Extend beyond section-wrapper to fill full page width */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: clamp(440px, 80vw, 680px);
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  touch-action: pan-y;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+  margin-bottom: var(--space-6);
+  overflow: hidden;
 }
 
-.lightboxImgContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ── Track: the flat layer all cards live in ─────────────────── */
+.carouselTrack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Do NOT use preserve-3d here — it bypasses z-index and lets tilted
+     side-card edges bleed over the active center card. Flat stacking
+     context + explicit z-index gives correct layering. */
+}
+
+/* ── Individual Card ─────────────────────────────────────────── */
+.card {
+  position: absolute;
+  /* Wider active card: ~44vw up to 420px, minimum 200px */
+  width: clamp(200px, 44vw, 420px);
+  left: 50%;
+  top: 50%;
+  margin-left: calc(clamp(200px, 44vw, 420px) / -2);
+  margin-top: calc(clamp(340px, 62vw, 560px) / -2);
+  height: clamp(340px, 62vw, 560px);
+
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  cursor: default;
   will-change: transform, opacity;
+  transition:
+    transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.55s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s ease;
+  transform-origin: center center;
+  /* flat (default) keeps z-index working correctly */
+  isolation: isolate;
+
+  /* Subtle card border */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.10);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.zoomIn {
-  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+.card:not(.cardActive) {
+  cursor: pointer;
 }
 
-.slideNext {
-  animation: slideInFromRight 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* ── Card inner wrapper ──────────────────────────────────────── */
+.cardInner {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-.slidePrev {
-  animation: slideInFromLeft 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* ── Active card ─────────────────────────────────────────────── */
+.cardActive {
+  z-index: 10 !important;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.32),
+    0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.lightboxImg {
-  max-width: 90vw;
-  max-height: 82vh;
-  object-fit: contain;
-  border-radius: var(--radius-md);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(201, 168, 76, 0.2);
-  border: 1px solid var(--border);
+/* ── Card image ──────────────────────────────────────────────── */
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   user-select: none;
-  -webkit-user-select: none;
   -webkit-user-drag: none;
   -webkit-touch-callout: none;
-  pointer-events: auto;
+  pointer-events: none;
+  transition: transform 0.6s ease;
 }
 
-/* ── Lightbox Controls ── */
-.closeBtn {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition);
-  z-index: 1005;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+.cardActive .cardImg {
+  transform: scale(1.02);
 }
 
-.closeBtn:hover {
-  background: rgba(30, 41, 59, 0.9);
-  color: var(--gold);
-  border-color: var(--gold);
-  transform: scale(1.08) rotate(90deg);
-  box-shadow: var(--shadow-gold), 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
-.closeBtn:active {
-  transform: scale(0.95);
-}
-
-.navBtn {
+/* ── Shine overlay on active card ───────────────────────────── */
+.cardShine {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.85);
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Dot indicators ──────────────────────────────────────────── */
+.dots {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  padding: 0 var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border, rgba(0, 0, 0, 0.18));
   cursor: pointer;
-  transition: all 0.2s var(--ease);
-  z-index: 1002;
+  padding: 0;
+  transition: all 0.28s ease;
   -webkit-tap-highlight-color: transparent;
   outline: none;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.75));
+  flex-shrink: 0;
 }
 
-.prevBtn {
-  left: -60px;
-}
-
-.nextBtn {
-  right: -60px;
+.dotActive {
+  background: var(--gold, #c9a84c);
+  width: 22px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.5);
 }
 
 @media (hover: hover) {
-  .navBtn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
-    transform: translateY(-50%) scale(1.15);
+  .dot:hover:not(.dotActive) {
+    background: var(--gold-light, #d4b86a);
+    transform: scale(1.2);
   }
 }
 
-.navBtn:active {
-  transform: translateY(-50%) scale(0.92);
-  background: rgba(255, 255, 255, 0.25);
-}
-
-@media (max-width: 768px) {
-  .navBtn {
-    width: 44px;
-    height: 44px;
-    background: rgba(0, 0, 0, 0.15);
-    color: rgba(255, 255, 255, 0.9);
+/* ── Responsive tweaks ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .carouselStage {
+    height: clamp(340px, 95vw, 480px);
   }
 
-  .prevBtn {
-    left: 4px;
-  }
-
-  .nextBtn {
-    right: 4px;
-  }
-
-  .closeBtn {
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
+  .card {
+    width: clamp(180px, 60vw, 240px);
+    height: clamp(280px, 88vw, 360px);
+    margin-left: calc(clamp(180px, 60vw, 240px) / -2);
+    margin-top: calc(clamp(280px, 88vw, 360px) / -2);
   }
 }
 
-.counter {
-  margin-top: 14px;
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--gold-light);
-  background: rgba(15, 23, 42, 0.75);
-  padding: 6px 18px;
-  border-radius: var(--radius-xl);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  letter-spacing: 0.08em;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideInFromRight {
-  0% {
-    opacity: 0;
-    transform: translateX(45px) scale(0.96);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-@keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-45px) scale(0.96);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
